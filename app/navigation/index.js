@@ -21,6 +21,9 @@ const RootContainerScreen = () => {
           <Stack.Screen
             name="AppStack"
             component={AppStack}
+            options={{
+              animationEnabled: false,
+            }}
           />
         </Stack.Navigator>
       </Host>

@@ -59,12 +59,11 @@ const TDTextInputNew = (props) => {
         </TouchableOpacity>
       ) : (
         <TouchableOpacity
-          style={[styles.textinputContainerNoTitle, { backgroundColor: onChangeText ? 'transparent' : '#F3F3F3' }]}
+          style={[styles.textinputContainerNoTitle, { backgroundColor: onChangeText ? '#FFF' : 'transparent' }]}
           onPress={() => {
             onChangeText && inputRef.current.focus();
           }}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            {icon && <FontAwesome name={icon} size={16} color="#616161" style={{ marginRight: 5 }} />}
             {onChangeText ? (
               <TextInput
                 ref={inputRef}
@@ -87,6 +86,7 @@ const TDTextInputNew = (props) => {
             ) : (
               <Text style={[styles.textinputNoitle]}>{value}</Text>
             )}
+            {icon && <FontAwesome name={icon} size={16} color="#616161" style={{ marginRight: 5 }} />}
           </View>
         </TouchableOpacity>
       )}
