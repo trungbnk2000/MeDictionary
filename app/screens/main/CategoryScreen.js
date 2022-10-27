@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, Text, SafeAreaView, FlatList, Image, TouchableOpacity} from 'react-native';
+import { View, Text, SafeAreaView, FlatList, Image, TouchableOpacity, Dimensions} from 'react-native';
 import TDTextInputNew from '../../components/TDTextInputNew';
 import { useState } from 'react';
 import { Button } from 'react-native-elements';
 import { useEffect } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5Pro';
 import { useNavigation } from '@react-navigation/native';
+const {width} = Dimensions.get("window");
+
+const ITEM_WIDTH = width/3 - 10*3
 
 const CategoryScreen = () => {
     const [categoryList, setCategoryList] = useState([]);
@@ -14,7 +17,7 @@ const CategoryScreen = () => {
 
     const renderCategoryItem = ({item}) => {
         return (
-            <TouchableOpacity style={{backgroundColor: '#FFF', margin: 10, height: 120, width: 95, padding: 10, alignItems: 'center', borderRadius: 10}}>
+            <TouchableOpacity style={{backgroundColor: '#FFF', margin: 10, height: ITEM_WIDTH + 10*3, width: ITEM_WIDTH, padding: 10, alignItems: 'center', borderRadius: 10}}>
                 <View style={{backgroundColor : item.color, padding: 10, borderRadius: 40, height: 80, width: 80, alignItems: 'center', justifyContent: 'center'}}>
                     <Image source={item.image}/>
                 </View>

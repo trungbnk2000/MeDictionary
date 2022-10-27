@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, Text, SafeAreaView, FlatList, Image, TouchableOpacity} from 'react-native';
+import { View, Text, SafeAreaView, FlatList, Image, TouchableOpacity, Dimensions} from 'react-native';
 import TDTextInputNew from '../../components/TDTextInputNew';
 import { useState } from 'react';
 import { Button } from 'react-native-elements';
 import { useEffect } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5Pro';
 import { useNavigation } from '@react-navigation/native';
+
+const {width} = Dimensions.get("window");
+
+const ITEM_WIDTH = width/2 - 10*3;
 
 const ProductListScreen = () => {
     const navigation = useNavigation();
@@ -14,9 +18,9 @@ const ProductListScreen = () => {
 
     const renderProductItem = ({item}) => {
         return (
-            <TouchableOpacity onPress={() => {navigation.navigate('DetailProductScreen', {data: item})}} style={{backgroundColor: '#FFF', marginVertical: 5, marginRight: 10, height: 170, width: 170, padding: 10, alignItems: 'center', borderRadius: 10, }}>
+            <TouchableOpacity onPress={() => {navigation.navigate('DetailProductScreen', {data: item})}} style={{backgroundColor: '#FFF', marginVertical: 10, marginHorizontal: 5, height: ITEM_WIDTH + 10*3, width: ITEM_WIDTH, padding: 10, alignItems: 'center', borderRadius: 10, }}>
                 <View style={{backgroundColor : item.color, padding: 5, borderRadius: 40, height: 80, width: 80, alignItems: 'center', justifyContent: 'center'}}>
-                    <Image source={item.image} style={{width: 160, height: 90, borderRadius: 10}}/>
+                    <Image source={item.image} style={{width: ITEM_WIDTH - 10, height: 90, borderRadius: 10}}/>
                     <TouchableOpacity style={{ backgroundColor: '#FFF', position: 'absolute', top: 0, right: -35, height: 25, width: 25, borderRadius: 20, alignItems: 'center', justifyContent: 'center' }}>
                         <FontAwesome name={'heart'} size={15} color="#2EC28B" />
                     </TouchableOpacity>
@@ -130,7 +134,7 @@ const ProductListScreen = () => {
                         <FontAwesome name={'arrow-left'} size={25} color="#FFF" />
                     </TouchableOpacity>
                     <Text style={{fontSize: 25, color: '#FFF', fontWeight: '600'}}>
-                        Danh mục thuốc
+                        Danh sách thuốc
                     </Text>
                     <Image source={require('../../assets/images/profile.png')} style={{height: 42, width: 42}} />
                 </View>
@@ -142,6 +146,7 @@ const ProductListScreen = () => {
                         numColumns={2}
                         key={2}
                         contentContainerStyle={{paddingTop: 40}}
+                        showsVerticalScrollIndicator={false}
                     />
                 </View>
             </View>

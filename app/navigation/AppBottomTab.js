@@ -10,7 +10,10 @@ import DeviceInfo from 'react-native-device-info';
 let isTablet = DeviceInfo.isTablet();
 
 import { MAIN_HomeScreen, ArticleListScreen } from '../screens/main';
-
+import CompanyListScreen from '../screens/company';
+import { DrugSearchScreen } from '../screens/drug';
+import FavoriteDrugScreen from '../screens/favorite';
+import MyDrugListScreen from '../screens/medicalbox/MyDrugListScreen';
 
 
 const AppBottomTab = () => {
@@ -52,16 +55,16 @@ const AppBottomTab = () => {
       />
 
       <Tab.Screen
-        name="ArticleListScreen"
-        component={ArticleListScreen}
+        name="CompanyListScreen"
+        component={CompanyListScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Bài viết',
+          tabBarLabel: 'Doanh nghiệp',
           tabBarBadge: null,
           tabBarIcon: ({focused, tintColor, size}) => (
             <View>
               <Icon
-                name="newspaper"
+                name="briefcase-medical"
                 size={isTablet ? 24 : 22}
                 color={focused ? Colors.primary : '#757E83'}
                 solid={focused ? true : false}
@@ -71,14 +74,14 @@ const AppBottomTab = () => {
         }}
       />
       <Tab.Screen
-        name="NhacNhoScreen"
-        component={MAIN_HomeScreen}
+        name="DrugSearchScreen"
+        component={DrugSearchScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Tư vấn',
+          tabBarLabel: 'Thuốc',
           tabBarIcon: ({focused, tintColor, size}) => (
             <Icon
-              name="comment-medical"
+              name="capsules"
               size={isTablet ? 24 : 22}
               color={focused ? Colors.primary : '#757E83'}
               solid={focused ? true : false}
@@ -87,14 +90,30 @@ const AppBottomTab = () => {
         }}
       />
       <Tab.Screen
-        name="SettingScreen"
-        component={MAIN_HomeScreen}
+        name="MyDrugListScreen"
+        component={MyDrugListScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Thông báo',
+          tabBarLabel: 'Tủ thuốc',
           tabBarIcon: ({focused, tintColor, size}) => (
             <Icon
-              name="bell"
+              name="star-of-life"
+              size={isTablet ? 24 : 22}
+              color={focused ? Colors.primary : '#757E83'}
+              solid={focused ? true : false}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="FavoriteDrugScreen"
+        component={FavoriteDrugScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Yêu thích',
+          tabBarIcon: ({focused, tintColor, size}) => (
+            <Icon
+              name="heart"
               size={isTablet ? 24 : 22}
               color={focused ? Colors.primary : '#757E83'}
               solid={focused ? true : false}

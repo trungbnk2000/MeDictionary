@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, Text, SafeAreaView, FlatList, Image, TouchableOpacity} from 'react-native';
+import { View, Text, SafeAreaView, FlatList, Image, TouchableOpacity, Dimensions} from 'react-native';
 import TDTextInputNew from '../../components/TDTextInputNew';
 import { useState } from 'react';
 import { Button } from 'react-native-elements';
 import { useEffect } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5Pro';
 import { useNavigation } from '@react-navigation/native';
+
+const {width} = Dimensions.get("window");
+
+ITEM_WIDTH = width - 10*4;
 
 const ArticleListScreen = () => {
     const navigation = useNavigation();
@@ -15,7 +19,7 @@ const ArticleListScreen = () => {
     const renderProductItem = ({item}) => {
         return (
             <TouchableOpacity onPress={() => {navigation.navigate('ArticleDetailScreen', {data: item})}} 
-                style={{flex:1, backgroundColor: '#FFF', marginVertical: 10, height: 300, width: '100%', padding: 10, alignItems: 'center', borderRadius: 10, }}>
+                style={{backgroundColor: '#FFF', marginVertical: 10, height: 300, width: ITEM_WIDTH, padding: 10, alignItems: 'center', borderRadius: 10, }}>
                 <View style={{flex: 4, backgroundColor: '#ff0000', width: '100%', borderRadius: 10}}>
                     <Image source={item.image} style={{height:'100%', width: '100%', borderRadius: 10}}/>
                 </View>

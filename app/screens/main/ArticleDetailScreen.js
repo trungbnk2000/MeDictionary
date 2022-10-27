@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, SafeAreaView, FlatList, Image, TouchableOpacity} from 'react-native';
+import { View, Text, SafeAreaView, FlatList, Image, TouchableOpacity, ScrollView} from 'react-native';
 import TDTextInputNew from '../../components/TDTextInputNew';
 import { useState } from 'react';
 import { Button } from 'react-native-elements';
@@ -36,31 +36,28 @@ const ArticleDetailScreen = () => {
                         <Image source={require('../../assets/images/Article1.png')} style={{height:'100%', width: '100%', borderRadius: 10}}/>
                     </View>
                     <View style={{flex: 2, paddingTop: 10, marginHorizontal: 2}}>
-                    <Text style={{fontSize: 16, color:'#36596A', fontWeight: 'bold', lineHeight: 25}}>
-                        {data.name}
-                    </Text>
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10}}>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <Image source={require('../../assets/images/profile.png')} style={{height: 35, width: 35}} />
-                            <Text style={{paddingLeft: 10, fontSize: 15, color: '#A7AFBC'}}>{data.author}</Text>
-                        </View>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <FontAwesome name='clock' size={20} color='#2EC28B' style={{paddingRight: 10}}/>
-                            <Text style={{color: '#A7AFBC'}}>{data.time}</Text>
-                        </View>
-                    </View>
-                    <View style={{paddingTop: 25}}>
-                        <Text style={{fontSize: 20, fontWeight: 'bold', color: '#36596A'}}>About Health Care</Text>
-                        <View style={Ơ}>
-                            <Text>
-                                Lorem Ipsum has bedeng the industry's standard dummy text everg since the to1500s, when ang unknown printer took a galley of type and vey scrambled it to make a type specimen book.s, but also the leap into electronic typesetting, toinremaining essentially unchanged. It waspopularised in the 1960s with the releaof Letraset sheets containing.Lorem Ipsum has bedeng the industry's standard dummy text everg since the to1500s, when ang unknown printer took a galley of type and vey scrambled it to make a type specimen book.s, but also the leap into electronic typesetting, toinremaining essentially unchanged. It waspopularised in the 1960s with the releaof Letraset sheets containing.
-                            </Text>
+                        <Text style={{fontSize: 16, color:'#36596A', fontWeight: 'bold', lineHeight: 25}}>
+                            {data.name}
+                        </Text>
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10}}>
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                <Image source={require('../../assets/images/profile.png')} style={{height: 35, width: 35}} />
+                                <Text style={{paddingLeft: 10, fontSize: 15, color: '#A7AFBC'}}>{data.author}</Text>
+                            </View>
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                <FontAwesome name='clock' size={20} color='#2EC28B' style={{paddingRight: 10}}/>
+                                <Text style={{color: '#A7AFBC'}}>{data.time}</Text>
+                            </View>
                         </View>
                     </View>
                 </View>
-                </View>
-                <View style={{height: 700}}>
-                    
+                <View style={{height: 500, paddingTop: 20, marginHorizontal: 0}}>
+                    <Text style={{fontSize: 25, fontWeight: 'bold', color: '#36596A'}}>About Health Care</Text>
+                    <ScrollView style={{paddingTop: 10}}>
+                        <Text style={{fontSize: 20, color: '#A7AFBC', lineHeight: 30}}>
+                            Lorem Ipsum has bedeng the industry's standard dummy text everg since the to1500s, when ang unknown printer took a galley of type and vey scrambled it to make a type specimen book.s, but also the leap into electronic typesetting, toinremaining essentially unchanged. It waspopularised in the 1960s with the releaof Letraset sheets containing.Lorem Ipsum has bedeng the industry's standard dummy text everg since the to1500s, when ang unknown printer took a galley of type and vey scrambled it to make a type specimen book.s, but also the leap into electronic typesetting, toinremaining essentially unchanged. It waspopularised in the 1960s with the releaof Letraset sheets containing.
+                        </Text>
+                    </ScrollView>
                 </View>
             </View>
         </View>

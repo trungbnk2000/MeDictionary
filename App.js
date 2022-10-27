@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler';
 import React from 'react';
 
 import { Provider } from 'react-redux';
@@ -10,12 +9,12 @@ import { View } from 'react-native';
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <Navigation />
-      </PersistGate>
-      <FlashMessage position="top" />
-    </Provider>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <Navigation />
+        </PersistGate>
+        <FlashMessage position="top" />
+      </Provider>
   );
 };
 

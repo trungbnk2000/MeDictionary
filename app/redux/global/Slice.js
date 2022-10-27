@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   accessToken: '',
   userInfo: null,
-
+  bookmarks: [],
+  medicalBox: [],
   listLoading: false,
   actionsLoading: false,
   error: null,
@@ -33,6 +34,34 @@ export const globalSlice = createSlice({
       } else {
         state.actionsLoading = true;
       }
+    },
+
+    setBookmarks: (state, action) => {
+      state.bookmarks = action?.payload;
+    },
+    removeBookmarkIndex: (state, action) => {
+      var index = action?.payload;
+      var temp = [...state.bookmarks];
+      temp.splice(index, 1);
+      state.bookmarks = temp;
+    },
+    addBookmarkItem: (state, action) => {
+      var newItem = action?.payload;
+      var temp = state.bookmarks || [];
+      temp.push(newItem);
+      state.bookmarks = temp;
+    },
+    removeMedicalBoxIndex: (state, action) => {
+      var index = action?.payload;
+      var temp = [...state.medicalBox];
+      temp.splice(index, 1);
+      state.medicalBox = temp;
+    },
+    addMedicalBoxItem: (state, action) => {
+      var newItem = action?.payload;
+      var temp = state.medicalBox || [];
+      temp.push(newItem);
+      state.medicalBox = temp;
     },
   },
 });
