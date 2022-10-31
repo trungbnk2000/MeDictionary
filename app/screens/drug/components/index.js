@@ -1,3 +1,4 @@
 import DraggableBottomSheet from "./DraggableBottomSheet";
+import ButtonBottomSheet from "./ButtonBottomSheet";
 
-export default DraggableBottomSheet;
+export {DraggableBottomSheet, ButtonBottomSheet};

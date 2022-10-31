@@ -35,7 +35,7 @@ const MAIN_HomeScreen = () => {
 
     const renderProductItem = ({item}) => {
         return (
-            <TouchableOpacity onPress={() => navigation.navigate('DetailProductScreen', {data: item})} style={{backgroundColor: '#FFF', marginHorizontal: 10, height: width/2, width: width/2 - 40, padding: 5, alignItems: 'center', borderRadius: 10,elevation: 5, borderColor: '#B5B0AC', borderWidth: 0.2}}>
+            <TouchableOpacity style={{backgroundColor: '#FFF', marginHorizontal: 10, height: width/2, width: width/2 - 40, padding: 5, alignItems: 'center', borderRadius: 10,elevation: 5, borderColor: '#B5B0AC', borderWidth: 0.2}}>
                 <View style={{flex: 2, padding: 5, borderRadius: 40, height: 80, width: 80, alignItems: 'center', justifyContent: 'center'}}>
                     <Image source={{uri:'https://drugbank.vn/api/public/gridfs/' + item.images[0]}} style={{width: 160, height: 80, borderRadius: 10}} resizeMode='contain' />
                     <TouchableOpacity style={{ backgroundColor: '#F4F5F9', position: 'absolute', top: 0, right: -35, height: 25, width: 25, borderRadius: 20, alignItems: 'center', justifyContent: 'center' }}>

@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { showMessage } from 'react-native-flash-message';
 import { useNavigation } from '@react-navigation/native';
 import { MAIN_HomeScreen,ArticleDetailScreen, CategoryScreen, ProductListScreen,ArticleListScreen, DetailProductScreen } from '../screens/main';
-import CompanyListScreen from '../screens/company';
 import { DrugSearchScreen, DrugDetailScreen } from '../screens/drug';
 import FavoriteDrugScreen from '../screens/favorite';
 import MyDrugListScreen from '../screens/medicalbox/MyDrugListScreen';
@@ -31,7 +30,6 @@ const App_ = () => {
 
             <Stack.Screen name="ArticleListScreen" component={ArticleListScreen} />
             <Stack.Screen name="ArticleDetailScreen" component={ArticleDetailScreen} />
-            <Stack.Screen name="CompanyListScreen" component={CompanyListScreen} />
             <Stack.Screen name="DrugSearchScreen" component={DrugSearchScreen} />
             <Stack.Screen name="FavoriteDrugScreen" component={FavoriteDrugScreen} />
             <Stack.Screen name="MyDrugListScreen" component={MyDrugListScreen} />

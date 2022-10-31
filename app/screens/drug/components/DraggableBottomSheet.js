@@ -5,11 +5,11 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome5Pro';
 const {width, height} = Dimensions.get('window');
 
 const MAX = height * 0.85;
-const MIN = height * 0.3;
+const MIN = height * 0.4;
 
 const MAX_UPWARD = MIN - MAX;
 const MAX_DOWNWARD = 0;
-const DRAG_THRESHOLD = 70;
+const DRAG_THRESHOLD = 50;
 
 const DraggableBottomSheet = (props) => {
     const {item} = props;
@@ -18,7 +18,7 @@ const DraggableBottomSheet = (props) => {
     const [changeTab, setChangeTab] = useState(false);
 
     useEffect(()=>{
-        console.log(item);
+        console.log(item.nongDo);
     },[])
 
     const panResponder = useRef(
@@ -90,8 +90,8 @@ const DraggableBottomSheet = (props) => {
                             setChangeTab(!changeTab);
                         }
                     }} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                        <Text style={{fontSize: 18, fontWeight: changeTab ? 'bold' : 'normal' ,color: changeTab ? '#1479FF' : '#A7AFBC'}}>
-                            Giá
+                        <Text style={{fontSize: 18, fontWeight: changeTab ? 'bold' : 'normal' ,color: changeTab ? '#1479FF' : '#A7AFBC', textAlign: 'center'}}>
+                            Thuốc cùng SX
                         </Text>
                         <View style={{backgroundColor: changeTab ? '#1479FF' : '#F4F5F7', width: '100%', height: 2, marginVertical: 15, borderRadius: 20}}></View>
                     </TouchableOpacity>
@@ -100,14 +100,24 @@ const DraggableBottomSheet = (props) => {
                     {
                         !changeTab ? (
                             <View>
-                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                    <Text style={{color: '#36596A', fontSize: 16, fontWeight: 'bold'}}>Dạng bào chế: </Text>
-                                    <Text style={{color: '#A7AFBC', fontSize: 16}}>{item.baoChe}</Text>
+                                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                                    <View style={{flex: 4, alignItems: 'flex-start'}}>
+                                        <Text style={{color: '#36596A', fontSize: 16, fontWeight: 'bold'}}>Hoạt chất</Text>
+                                        {item.hoatChat?.split('; ')?.map((item, index) => (
+                                            <Text key={index} style={{color: '#A7AFBC', fontSize: 14, paddingTop: 5}}>{item}</Text>
+                                        ))}
+                                    </View>
+                                    <View style={{flex: 1, alignItems: 'flex-end'}}>
+                                        <Text style={{color: '#36596A', fontSize: 16, fontWeight: 'bold'}}>Nồng độ</Text>
+                                        {item.nongDo?.split(';')?.map((item, index) => (
+                                            <Text key={index} style={{color: '#A7AFBC', fontSize: 14, paddingTop: 5}}>{item}</Text>
+                                        ))}
+                                    </View>
                                 </View>
                                 <View style={{flexDirection: 'column', marginTop: 10}}>
                                     <Text style={{color: '#36596A', fontSize: 16, fontWeight: 'bold'}}>Quy cách đóng gói: </Text>
                                     {item.dongGoi.split('; ')?.map((item, index)=>(
-                                        <View style={{flexDirection: 'row', alignItems: 'center', paddingTop: 10, paddingStart: 10}}>
+                                        <View key={index} style={{flexDirection: 'row', alignItems: 'center', paddingTop: 10, paddingStart: 10}}>
                                             <FontAwesome name="capsules" size={15} color='#2EC28B' />
                                             <Text key={index} style={{color: '#A7AFBC', fontSize: 16, paddingLeft: 10}}>{item}</Text> 
                                         </View>
@@ -136,7 +146,16 @@ const DraggableBottomSheet = (props) => {
                                 
                             </View>
                         ) : (
-                            <Text>Giá</Text>
+                            <View>
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                    <Text style={{color: '#36596A', fontSize: 16, fontWeight: 'bold'}}>Giá bán buôn: </Text>
+                                    <Text style={{color: '#A7AFBC', fontSize: 16}}></Text>
+                                </View>
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                    <Text style={{color: '#36596A', fontSize: 16, fontWeight: 'bold'}}>Giá kê khai: </Text>
+                                    <Text style={{color: '#A7AFBC', fontSize: 16}}></Text>
+                                </View>
+                            </View>
                         )
                     }
                 </ScrollView>

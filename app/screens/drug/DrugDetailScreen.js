@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, Text, SafeAreaView, FlatList, Image, TouchableOpacity, ScrollView, Animated} from 'react-native';
+import { View, Text, Platform, FlatList, Image, TouchableOpacity, ScrollView, Animated, Linking} from 'react-native';
 import TDTextInputNew from '../../components/TDTextInputNew';
 import { useState } from 'react';
 import { Button, Divider } from 'react-native-elements';
 import { useEffect } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5Pro';
 import { useNavigation, useRoute} from '@react-navigation/native';
-import DraggableBottomSheet from './components';
+import { DraggableBottomSheet, ButtonBottomSheet } from './components';
+
+
 
 const DrugDetailScreen = () => {
     const navigation = useNavigation();
@@ -17,8 +19,17 @@ const DrugDetailScreen = () => {
     const scrollY = React.useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        
+        console.log(data);
     },[])
+
+    const handlePress = () => {
+        let fileUrl = data.fileName ?? '';
+        if (Platform.OS === 'ios' && fileUrl != '') {
+            Linking.openURL(fileUrl).catch((err) => console.error('An error occurred', err));
+          } else {
+            Linking.openURL(fileUrl).catch((err) => console.error('An error occurred', err));
+          }
+    }
 
     return (    
         <View style={{flex:1, backgroundColor: '#F4F5F9', justifyContent: 'space-between'}}>
@@ -30,39 +41,38 @@ const DrugDetailScreen = () => {
                     <Text style={{fontSize: 25, color: '#FFF', fontWeight: '600'}}>
                         Thông tin thuốc
                     </Text>
-                    <Image source={require('../../assets/images/profile.png')} style={{height: 42, width: 42}} />
+                    {data.fileName ? (
+                        <TouchableOpacity onPress={() => handlePress()} >
+                            <FontAwesome name='file-pdf' size={25} light color={'#fff'} />
+                        </TouchableOpacity>
+                    ) : (
+                        <Image source={require('../../assets/images/profile.png')} style={{height: 42, width: 42}} />
+                    )}
                 </View>
                 <View style={{height: 500}}>
-                    <View style={{height: '35%', marginTop: 25, backgroundColor: '#fff', borderRadius: 10, padding: 10, elevation: 10, shadowOpacity: 0.3, shadowRadius: 10}}>
-                        <Image source={{uri: 'https://drugbank.vn/api/public/gridfs/' + data.images[0]}} style={{borderRadius: 10, height: '100%', width: '100%'}} resizeMode='cover'/>
+                    <View style={{height: '35%', marginTop: 25, backgroundColor: '#fff', borderRadius: 10, padding: 5, ...Platform.select({
+                        android: {elevation: 3},
+                        ios: {
+                            shadowColor: '#a8bed2',
+                            shadowOpacity: 1,
+                            shadowRadius: 6,
+                            shadowOffset: {
+                                width: 2,
+                                height: 2,
+                            }
+                        }
+                    })}}>
+                        <Image source={require('../../assets/images/Article1.png')} style={{borderRadius: 10, height: '100%', width: '100%'}} resizeMode='cover'/>
                     </View>
                     <View style={{flex: 1, flexDirection: 'column', paddingTop: 10}}>
                         <Text style={{fontSize: 25, fontWeight: 'bold', color: '#36596A'}}>Tên thuốc: {data.tenThuoc}</Text>
                         <Text style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC'}}>Số đăng ký: {data.soDangKy}</Text>
-                        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                            <Text style={{paddingTop: 10, fontSize: 16, fontWeight: 'bold', color: '#2EC28B'}}>Hoạt chất-Nồng độ</Text>
-                            <Text style={{paddingTop: 10, fontSize: 16, fontWeight: 'bold', color: '#2EC28B'}}>Hàm lượng</Text>
-                        </View>
-                        <View style={{flexDirection: 'row', paddingTop: 10, justifyContent: 'space-between'}}>
-                            <View>
-                                {data.hoatChat.split('; ')?.map((item, index) => (
-                                    <Text key={index} style={{fontSize: 16, color: '#A7AFBC', paddingBottom: item.length < 20 ? 25 : 5, paddingRight: 30}}>
-                                        {item}
-                                    </Text>
-                                ))}
-                            </View>
-                            <View>
-                                {data.nongDo.split('; ')?.map((item, index) => (
-                                    <Text key={index} style={{fontSize: 14, color: '#A7AFBC',paddingBottom: data.nongDo.split(';').length > 1? 30 : 0, fontWeight: 'bold'}}>
-                                    -{item}
-                                    </Text>
-                                ))} 
-                            </View>
-                        </View>
+                        <Text style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC'}}>Dạng bào chế: {data.baoChe}</Text>
                     </View>
                 </View>
             </View>
             <DraggableBottomSheet item={data}/>
+            <ButtonBottomSheet item={data} />
         </View>
     );
 };

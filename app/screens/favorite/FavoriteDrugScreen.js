@@ -11,7 +11,7 @@ import * as actions from '../../redux/global/Actions';
 
 const FavoriteDrugScreen = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigation();
+    const navigation = useNavigation();
     const [searchFilter, setSearchFilter] = useState('');
     const dispatch = useDispatch();
     const bookmarks = useSelector(state => state.global.bookmarks);
@@ -44,7 +44,7 @@ const FavoriteDrugScreen = () => {
         var check = bookmarks?.findIndex(i => i.id == item?.id);
         
         return (
-            <TouchableOpacity style={{backgroundColor: '#FFF',justifyContent: 'space-evenly', width: width - 20*2, height: height/4 - 20*2 , marginHorizontal: 20, marginTop: 25, borderRadius: 10, padding: 10}}>
+            <TouchableOpacity onPress={() => navigation.navigate('DrugDetailScreen', {data: item})} style={{backgroundColor: '#FFF',justifyContent: 'space-evenly', width: width - 20*2, height: height/4 - 20*2 , marginHorizontal: 20, marginTop: 25, borderRadius: 10, padding: 10}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <TouchableOpacity onPress={() => {
                         handleRemoveBookmark(check);
@@ -70,14 +70,27 @@ const FavoriteDrugScreen = () => {
     }
     
     useEffect(() => {
-        setListFavoriteDrug(bookmarks ?? []);
-    },[bookmarks])
+        console.log(searchFilter);
+        var _bookmarks = [];
+        if(searchFilter != ''){
+            bookmarks.map((item, index) => {
+                if(item.soDangKy.includes(searchFilter) || item.tenThuoc.includes(searchFilter)){
+                    _bookmarks.push(item);
+                }
+            })
+        }
+        else{
+            _bookmarks = bookmarks;
+        }
+        console.log(_bookmarks);
+        setListFavoriteDrug(_bookmarks ?? []);
+    },[bookmarks, searchFilter])
 
     return (    
         <View style={{flex:1, backgroundColor: '#F4F5F9', justifyContent: 'space-between'}}>
             <View style={{width: '100%', flexDirection: 'column', justifyContent: 'space-between', padding: 25, backgroundColor: '#1479FF', height: '28%', borderBottomLeftRadius: 50, borderBottomRightRadius: 50}}>
                 <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 50, paddingBottom: 10}}>
-                    <TouchableOpacity onPress={()=>{navigate.goBack()}}>
+                    <TouchableOpacity onPress={()=>{navigation.goBack()}}>
                         <FontAwesome name={'arrow-left'} size={25} color="#FFF" />
                     </TouchableOpacity>
                     <Text style={{fontSize: 25, color: '#FFF', fontWeight: '600'}}>
@@ -94,10 +107,6 @@ const FavoriteDrugScreen = () => {
                             <FontAwesome name='search' color={'#A7AFBC'} size={25}/>
                         </TouchableOpacity>
                     </View>
-                    <View style={{flex:0.5, backgroundColor: '#1479FF'}}></View>
-                    <TouchableOpacity style={{flex:2, justifyContent: 'center', alignItems: 'center'}}>
-                        <FontAwesome name='barcode' size={25} />
-                    </TouchableOpacity>
                 </View>
             </View>
             <View style={{flex:1}}>

@@ -386,6 +386,8 @@ PODS:
     - React-Core
   - RNCAsyncStorage (1.17.10):
     - React-Core
+  - RNCPicker (2.4.8):
+    - React-Core
   - RNDeviceInfo (10.2.0):
     - React-Core
   - RNFS (2.20.0):
@@ -496,6 +498,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -602,6 +605,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/rn-fetch-blob"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNCPicker:
+    :path: "../node_modules/@react-native-picker/picker"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
   RNFS:
@@ -672,6 +677,7 @@ SPEC CHECKSUMS:
   ReactCommon: 7f86326b92009925c6dcf93f8e825060171c379f
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNCAsyncStorage: 0c357f3156fcb16c8589ede67cc036330b6698ca
+  RNCPicker: 0bf8ef8f7800524f32d2bb2a8bcadd53eda0ecd1
   RNDeviceInfo: 8b83e99e290deaf1bab71673cc636776ef647b6f
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: 4defbd70b2faf3d6761b82fa7880285241762cb0

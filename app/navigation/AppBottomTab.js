@@ -10,7 +10,6 @@ import DeviceInfo from 'react-native-device-info';
 let isTablet = DeviceInfo.isTablet();
 
 import { MAIN_HomeScreen, ArticleListScreen } from '../screens/main';
-import CompanyListScreen from '../screens/company';
 import { DrugSearchScreen } from '../screens/drug';
 import FavoriteDrugScreen from '../screens/favorite';
 import MyDrugListScreen from '../screens/medicalbox/MyDrugListScreen';
@@ -53,26 +52,6 @@ const AppBottomTab = () => {
           ),
         }}
       />
-
-      <Tab.Screen
-        name="CompanyListScreen"
-        component={CompanyListScreen}
-        options={{
-          headerShown: false,
-          tabBarLabel: 'Doanh nghiệp',
-          tabBarBadge: null,
-          tabBarIcon: ({focused, tintColor, size}) => (
-            <View>
-              <Icon
-                name="briefcase-medical"
-                size={isTablet ? 24 : 22}
-                color={focused ? Colors.primary : '#757E83'}
-                solid={focused ? true : false}
-              />
-            </View>
-          ),
-        }}
-      />
       <Tab.Screen
         name="DrugSearchScreen"
         component={DrugSearchScreen}
@@ -94,7 +73,7 @@ const AppBottomTab = () => {
         component={MyDrugListScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Tủ thuốc',
+          tabBarLabel: 'Tủ thuốc cá nhân',
           tabBarIcon: ({focused, tintColor, size}) => (
             <Icon
               name="star-of-life"

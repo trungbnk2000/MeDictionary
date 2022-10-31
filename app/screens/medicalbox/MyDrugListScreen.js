@@ -5,16 +5,16 @@ import { useEffect } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5Pro';
 import { useNavigation } from '@react-navigation/native';
 const {width, height} = Dimensions.get("window");
+import { Overlay } from 'react-native-elements';
 import { useSelector, useDispatch} from 'react-redux';
 import * as actions from '../../redux/global/Actions';
-
 
 const MyDrugListScreen = () => {
     const [isLoading, setIsLoading] = useState(false);
     const navigation = useNavigation();
     const [searchFilter, setSearchFilter] = useState('');
     const dispatch = useDispatch();
-    const bookmarks = useSelector(state => state.global.bookmarks);
+    const medicalBox = useSelector(state => state.global.medicalBox);
     const [footerLoad, setFooterLoad] = useState(false);
     const [listFavoriteDrug, setListFavoriteDrug] = useState([]);
 
@@ -23,7 +23,7 @@ const MyDrugListScreen = () => {
 
         const handleRemoveBookmark = (index) => {
             Alert.alert(
-                'Xác nhận xoá thuốc khỏi mục yêu thích!',
+                'Xác nhận xoá thuốc khỏi tủ thuốc của bạn!',
                 'Sau khi xoá, những dự liệu về thuốc trước đây cũng bị xoá! Bạn có chắc chắn xoá thuốc này không?',
                 [
                     {
@@ -35,7 +35,7 @@ const MyDrugListScreen = () => {
                       text: 'Xoá',
                       onPress: () => {
                         setIsLoading(true);
-                        dispatch(actions.removeBookmarkIndex(index));
+                        dispatch(actions.removeMedicalBoxIndex(index));
                         setIsLoading(false);
                       },
                     },
@@ -43,17 +43,24 @@ const MyDrugListScreen = () => {
             )   
         }
         
-        var check = bookmarks?.findIndex(i => i.id == item?.id);
+        var check = medicalBox?.findIndex(i => i.id == item?.id);
         
         return (
-            <TouchableOpacity style={{backgroundColor: '#FFF',justifyContent: 'space-evenly', width: width - 20*2, height: height/4 - 20*2 , marginHorizontal: 20, marginTop: 25, borderRadius: 10, padding: 10}}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <TouchableOpacity onPress={() => {
-                        handleRemoveBookmark(check);
-                    }}>
-                        <FontAwesome solid={check > -1 ? true : false} name='heart' size={25} color={'#2EC28B'} />
-                    </TouchableOpacity>
-                    <Text style={{color: '#36596A', fontSize: 18, fontWeight: 'bold', paddingLeft: 10}}>{item.soDangKy}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('DrugDetailScreen', {data: item})} style={{backgroundColor: '#FFF',justifyContent: 'space-evenly', width: width - 20*2, height: height/4 - 20*2 , marginHorizontal: 20, marginTop: 25, borderRadius: 10, padding: 10}}>
+                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                        <TouchableOpacity onPress={() => {
+                            handleRemoveBookmark(check);
+                        }}>
+                            <FontAwesome solid={check > -1 ? true : false} name='users-medical' size={25} color={'#2EC28B'} />
+                        </TouchableOpacity>
+                        <Text style={{color: '#36596A', fontSize: 18, fontWeight: 'bold', paddingLeft: 10}}>{item.soDangKy}</Text>
+                    </View>
+                    <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}> 
+                        <Text style={{color: '#1479FF', fontSize: 16}}>Còn: </Text>
+                        <Text style={{fontWeight: 'bold', color: '#1479FF', fontSize: 16}}>{item.amount}</Text>
+                        <Text style={{color: '#1479FF', fontSize: 16}}> {item.unit}</Text>
+                    </View>
                 </View>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <FontAwesome name='notes-medical' color={'#2EC28B'} size={15}/>
@@ -72,8 +79,20 @@ const MyDrugListScreen = () => {
     }
     
     useEffect(() => {
-        setListFavoriteDrug(bookmarks ?? []);
-    },[bookmarks])
+        var _medicalBox = [];
+        if(searchFilter != ''){
+            medicalBox.map((item, index) => {
+                if(item.soDangKy.includes(searchFilter) || item.tenThuoc.includes(searchFilter)){
+                    _medicalBox.push(item);
+                }
+            })
+        }
+        else{
+            _medicalBox = medicalBox;
+        }
+        console.log(_medicalBox);
+        setListFavoriteDrug(_medicalBox ?? []);
+    },[medicalBox, searchFilter])
 
     return (    
         <View style={{flex:1, backgroundColor: '#F4F5F9', justifyContent: 'space-between'}}>
@@ -92,9 +111,7 @@ const MyDrugListScreen = () => {
                         <View style={{flex: 10, padding: 10}}>
                             <TextInput autoComplete='false' value={searchFilter} onChangeText={(value) => setSearchFilter(value)} placeholder='Tìm kiếm thuốc' placeholderTextColor={'#ABAEBE'} style={{flex: 8, height: '100%', fontSize: 18}}/>
                         </View>
-                        <TouchableOpacity onPress={()=>{
-                            {navigation.navigate('DrugSearchScreen', {dataSearch: searchFilter})}
-                        }} style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
+                        <TouchableOpacity style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
                             <FontAwesome name='search' color={'#A7AFBC'} size={25}/>
                         </TouchableOpacity>
                     </View>
