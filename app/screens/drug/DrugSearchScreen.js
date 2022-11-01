@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, SafeAreaView, FlatList, Image, TouchableOpacity, Dimensions, ActivityIndicator} from 'react-native';
+import { Platform, View, Text, TextInput, SafeAreaView, FlatList, Image, TouchableOpacity, Dimensions, ActivityIndicator} from 'react-native';
 import TDTextInputNew from '../../components/TDTextInputNew';
 import { useState } from 'react';
 import { Button } from 'react-native-elements';
@@ -23,6 +23,7 @@ const DrugSearchScreen = () => {
     const [perpage, setPerpage] = useState(1);
     const [footerLoad, setFooterLoad] = useState(false);
     const [allLoaded, setAllLoaded] = useState(false);
+    const [searchFilter, setSearchFilter] = useState('')
     const bookmarks = useSelector(state => state.global.bookmarks);
 
     const _renderDrug = ({item}) => {
@@ -32,7 +33,18 @@ const DrugSearchScreen = () => {
         return (
             <TouchableOpacity onPress={() => {
                 navigation.navigate('DrugDetailScreen', {data: item});
-            }} style={{backgroundColor: '#FFF', width: width/2 - 15, height: ITEM_WIDTH + 40, marginLeft: 10, marginBottom: 10, borderRadius: 10, shadowOpacity: 0.1}}>
+            }} style={{backgroundColor: '#FFF', width: width/2 - 15, height: ITEM_WIDTH + 40, marginLeft: 10, marginBottom: 10, borderRadius: 10, ...Platform.select({
+                android: {elevation: 3},
+                ios: {
+                    shadowColor: '#a8bed2',
+                    shadowOpacity: 1,
+                    shadowRadius: 6,
+                    shadowOffset: {
+                        width: 2,
+                        height: 2,
+                    }
+                }
+            })}}>
                 <View style={{flex: 1, alignItems: 'center', alignSelf: 'center', width: ITEM_WIDTH - 20, height: ITEM_WIDTH/2 + 10}}>
                     <Image source={require('../../assets/images/Frame.png')} style={{flex:1, paddingTop: 20}} resizeMode='contain' />
                     <TouchableOpacity onPress={() => {
@@ -135,8 +147,9 @@ const DrugSearchScreen = () => {
 
     return (    
         <View style={{flex:1, backgroundColor: '#F4F5F9'}}>
-            <View style={{flexDirection: 'column', padding: 25, backgroundColor: '#1479FF', height: '28%', borderBottomLeftRadius: 50, borderBottomRightRadius: 50, paddingHorizontal: 0}}>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 50, paddingBottom: 20, paddingHorizontal: 20}}>
+            <View style={{flexDirection: 'column', padding: 25, backgroundColor: '#1479FF', height: '28%', borderBottomLeftRadius: 50, borderBottomRightRadius: 50, paddingHorizontal: 20}}>
+                <View style={{height: Platform.OS === 'ios' ? '20%' : '0%'}}></View>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                     <TouchableOpacity onPress={()=>{navigation.goBack()}}>
                         <FontAwesome name={'arrow-left'} size={25} color="#FFF" />
                     </TouchableOpacity>
@@ -145,19 +158,26 @@ const DrugSearchScreen = () => {
                     </Text>
                     <Image source={require('../../assets/images/profile.png')} style={{height: 42, width: 42}} />
                 </View>
-                <View style={{height: height - 150}}>
-                    {isLoading ? (
+                <View style={{marginTop: 20, height: Platform.OS === 'ios' ? '35%' : '50%', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#FFF', borderRadius: 10, padding: 10}}>
+                    <TextInput value={searchFilter} onChangeText={(value) => setSearchFilter(value)} placeholder='Tìm kiếm thuốc' placeholderTextColor={'#ABAEBE'} style={{flex: 8, height: '100%', fontSize: 18}}/>
+                    <TouchableOpacity onPress={() => {navigation.navigate('DrugSearchScreen', {dataSearch: searchFilter})}} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                        <FontAwesome name='search' size={25} color='#ABAEBE'/>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={{flex: 1}}>
+                {isLoading ? (
                         <ActivityIndicator size="large" color="#fb8c00" style={{flex: 1, justifyContent: 'center'}} />
                     ):(
-                        <View style={{flex: 1}}>
+                        <View style={{flex: 1, paddingTop: 10}}>
                             <FlatList 
+                                showsVerticalScrollIndicator={false}
                                 data={drugList}
                                 renderItem={(item) => <_renderDrug item={item.item}/>}
                                 keyExtractor={item => item.id}
                                 numColumns={2}
                                 key={2}
-                                contentContainerStyle={{paddingBottom: 60}}
-                                showsVerticalScrollIndicator={false}
+                                contentContainerStyle={{paddingBottom: 60, flexGrow: 1}}
                                 onEndReached={() => loadMoreDrug()}
                                 onEndReachedThreshold={0.3}
                                 ListFooterComponent={footerLoad ? <ActivityIndicator /> : <View />}
@@ -167,7 +187,6 @@ const DrugSearchScreen = () => {
                             />
                         </View>
                     )}
-                </View>
             </View>
         </View>
     );

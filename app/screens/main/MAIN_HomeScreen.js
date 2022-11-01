@@ -115,7 +115,7 @@ const MAIN_HomeScreen = () => {
                         <Image source={require('../../assets/images/profile.png')} style={{height: 42, width: 42}} />
                     </View>
                     <View style={{marginTop: 10, height: 60, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#FFF', borderRadius: 5, padding: 10}}>
-                        <TextInput autoComplete='false' value={searchFilter} onChangeText={(value) => setSearchFilter(value)} placeholder='Tìm kiếm thuốc' placeholderTextColor={'#ABAEBE'} style={{flex: 8, height: '100%', fontSize: 18}}/>
+                        <TextInput value={searchFilter} onChangeText={(value) => setSearchFilter(value)} placeholder='Tìm kiếm thuốc' placeholderTextColor={'#ABAEBE'} style={{flex: 8, height: '100%', fontSize: 18}}/>
                         <TouchableOpacity onPress={() => {navigation.navigate('DrugSearchScreen', {dataSearch: searchFilter})}} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                             <FontAwesome name='search' size={25} color='#ABAEBE'/>
                         </TouchableOpacity>
@@ -145,9 +145,7 @@ const MAIN_HomeScreen = () => {
                         <Text style={{fontSize: 20, color: '#36596A', fontWeight: '600'}}>
                             Doanh nghiệp nổi bật
                         </Text>
-                        <TouchableOpacity onPress={() => {
-                            navigation.navigate('CategoryScreen');
-                        }} style={{backgroundColor: '#FFF', padding: 6}}>
+                        <TouchableOpacity style={{backgroundColor: '#FFF', padding: 6}}>
                             <Text style={{fontSize: 12, color: '#A7AFBC'}}>Xem tất cả</Text>
                         </TouchableOpacity>
                     </View>
@@ -167,9 +165,7 @@ const MAIN_HomeScreen = () => {
                         <Text style={{fontSize: 20, color: '#36596A', fontWeight: '600'}}>
                             Thuốc được tìm kiếm nhiều
                         </Text>
-                        <TouchableOpacity onPress={() => {
-                            navigation.navigate('ProductListScreen');
-                        }} style={{backgroundColor: '#FFF', padding: 6}}>
+                        <TouchableOpacity style={{backgroundColor: '#FFF', padding: 6}}>
                             <Text style={{fontSize: 12, color: '#A7AFBC'}}>Xem tất cả</Text>
                         </TouchableOpacity>
                     </View>

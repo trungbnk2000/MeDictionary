@@ -32,9 +32,10 @@ const DrugDetailScreen = () => {
     }
 
     return (    
-        <View style={{flex:1, backgroundColor: '#F4F5F9', justifyContent: 'space-between'}}>
+        <View style={{flex:1, backgroundColor: '#F4F5F9'}}>
             <View style={{flexDirection: 'column', padding: 25, backgroundColor: '#1479FF', height: '30%', borderBottomLeftRadius: 50, borderBottomRightRadius: 50, paddingHorizontal: 20}}>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 50}}>
+                <View style={{height: Platform.OS === 'ios' ? '20%' : '0%'}}></View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 0}}>
                     <TouchableOpacity onPress={()=>{navigation.goBack()}}>
                         <FontAwesome name={'arrow-left'} size={25} color="#FFF" />
                     </TouchableOpacity>

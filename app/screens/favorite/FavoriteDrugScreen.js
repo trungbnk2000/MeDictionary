@@ -44,7 +44,18 @@ const FavoriteDrugScreen = () => {
         var check = bookmarks?.findIndex(i => i.id == item?.id);
         
         return (
-            <TouchableOpacity onPress={() => navigation.navigate('DrugDetailScreen', {data: item})} style={{backgroundColor: '#FFF',justifyContent: 'space-evenly', width: width - 20*2, height: height/4 - 20*2 , marginHorizontal: 20, marginTop: 25, borderRadius: 10, padding: 10}}>
+            <TouchableOpacity onPress={() => navigation.navigate('DrugDetailScreen', {data: item})} style={{backgroundColor: '#FFF',justifyContent: 'space-evenly', width: width - 20*2, height: height/4 - 20*2 , marginHorizontal: 20, marginTop: 25, borderRadius: 10, padding: 10, ...Platform.select({
+                android: {elevation: 3},
+                ios: {
+                    shadowColor: '#a8bed2',
+                    shadowOpacity: 1,
+                    shadowRadius: 6,
+                    shadowOffset: {
+                        width: 2,
+                        height: 2,
+                    }
+                }
+            })}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <TouchableOpacity onPress={() => {
                         handleRemoveBookmark(check);
@@ -88,8 +99,9 @@ const FavoriteDrugScreen = () => {
 
     return (    
         <View style={{flex:1, backgroundColor: '#F4F5F9', justifyContent: 'space-between'}}>
-            <View style={{width: '100%', flexDirection: 'column', justifyContent: 'space-between', padding: 25, backgroundColor: '#1479FF', height: '28%', borderBottomLeftRadius: 50, borderBottomRightRadius: 50}}>
-                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 50, paddingBottom: 10}}>
+            <View style={{flexDirection: 'column', padding: 25, backgroundColor: '#1479FF', height: '28%', borderBottomLeftRadius: 50, borderBottomRightRadius: 50, paddingHorizontal: 20}}>
+                <View style={{height: Platform.OS === 'ios' ? '20%' : '0%'}}></View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 0}}>
                     <TouchableOpacity onPress={()=>{navigation.goBack()}}>
                         <FontAwesome name={'arrow-left'} size={25} color="#FFF" />
                     </TouchableOpacity>
@@ -98,15 +110,11 @@ const FavoriteDrugScreen = () => {
                     </Text>
                     <Image source={require('../../assets/images/profile.png')} style={{height: 42, width: 42}} />
                 </View>
-                <View style={{flex: 1, height: '100%', backgroundColor: '#FFF', justifyContent: 'space-between', flexDirection: 'row', borderRadius: 10}}>
-                    <View style={{flex:8, flexDirection: 'row', justifyContent: 'space-between'}}>     
-                        <View style={{flex: 10, padding: 10}}>
-                            <TextInput autoComplete='false' value={searchFilter} onChangeText={(value) => setSearchFilter(value)} placeholder='Tìm kiếm thuốc' placeholderTextColor={'#ABAEBE'} style={{flex: 8, height: '100%', fontSize: 18}}/>
-                        </View>
-                        <TouchableOpacity style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
-                            <FontAwesome name='search' color={'#A7AFBC'} size={25}/>
-                        </TouchableOpacity>
-                    </View>
+                <View style={{marginTop: 20, height: Platform.OS === 'ios' ? '35%' : '50%', backgroundColor: '#FFF', justifyContent: 'space-between', flexDirection: 'row', borderRadius: 10, padding: 10}}>
+                    <TextInput value={searchFilter} onChangeText={(value) => setSearchFilter(value)} placeholder='Tìm kiếm thuốc' placeholderTextColor={'#ABAEBE'} style={{flex: 8, height: '100%', fontSize: 18}}/>
+                    <TouchableOpacity onPress={() => {navigation.navigate('DrugSearchScreen', {dataSearch: searchFilter})}} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                        <FontAwesome name='search' size={25} color='#ABAEBE'/>
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={{flex:1}}>
