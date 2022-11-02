@@ -1,13 +1,24 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { View, Image, StatusBar, StyleSheet, Dimensions, Text, Vibration, Alert, AppState } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, {useState, useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {
+  View,
+  Image,
+  StatusBar,
+  StyleSheet,
+  Dimensions,
+  Text,
+  Vibration,
+  Alert,
+  AppState,
+} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import NetInfo from '@react-native-community/netinfo';
-import { showMessage, hideMessage } from 'react-native-flash-message';
-import { Host, Portal } from 'react-native-portalize';
+import {showMessage, hideMessage} from 'react-native-flash-message';
+import {Host, Portal} from 'react-native-portalize';
 import AppStack from './AppStack';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,17 +27,19 @@ const RootContainerScreen = () => {
 
   return (
     <NavigationContainer>
-      <Host>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen
-            name="AppStack"
-            component={AppStack}
-            options={{
-              animationEnabled: false,
-            }}
-          />
-        </Stack.Navigator>
-      </Host>
+      <GestureHandlerRootView style={{flex: 1}}>
+        <Host>
+          <Stack.Navigator screenOptions={{headerShown: false}}>
+            <Stack.Screen
+              name="AppStack"
+              component={AppStack}
+              options={{
+                animationEnabled: false,
+              }}
+            />
+          </Stack.Navigator>
+        </Host>
+      </GestureHandlerRootView>
     </NavigationContainer>
   );
 };
