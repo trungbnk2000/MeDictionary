@@ -110,7 +110,7 @@ const MAIN_HomeScreen = () => {
                 <View style={{flexDirection: 'column', padding: 20}}>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 0}}>
                         <Text style={{fontSize: 25, color: '#36596A', fontWeight: '600'}}>
-                            Chào, Trung
+                            Xin chào
                         </Text>
                         <Image source={require('../../assets/images/profile.png')} style={{height: 42, width: 42}} />
                     </View>
@@ -125,7 +125,7 @@ const MAIN_HomeScreen = () => {
                     <View style={{flexDirection: 'row'}}>
                         <View style={{flexDirection: 'column'}}>
                             <Text style={{fontSize: 20, color: '#FFF', fontWeight: 'bold'}}>Tình hình COVID-19</Text>
-                            <Text style={{color: '#FFF', paddingTop: 15}}>Lorep isum has beening.</Text>
+                            <Text style={{color: '#FFF', paddingTop: 15}}>Thông tin về y tế.</Text>
                             <Button
                                 title="Chi tiết"
                                 buttonStyle={{borderRadius: 5, backgroundColor: '#2EC28B', width: 120, marginTop: 20, marginLeft: 5}}

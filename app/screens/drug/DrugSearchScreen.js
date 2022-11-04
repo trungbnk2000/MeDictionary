@@ -38,7 +38,7 @@ const DrugSearchScreen = () => {
                 ios: {
                     shadowColor: '#a8bed2',
                     shadowOpacity: 1,
-                    shadowRadius: 6,
+                    shadowRadius: 3,
                     shadowOffset: {
                         width: 2,
                         height: 2,
