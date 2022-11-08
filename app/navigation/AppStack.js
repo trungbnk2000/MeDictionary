@@ -8,6 +8,7 @@ import { MAIN_HomeScreen,ArticleDetailScreen, CategoryScreen, ProductListScreen,
 import { DrugSearchScreen, DrugDetailScreen } from '../screens/drug';
 import FavoriteDrugScreen from '../screens/favorite';
 import MyDrugListScreen from '../screens/medicalbox/MyDrugListScreen';
+import PrescriptionListScreen from '../screens/prescription';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import AppBottomTab from './AppBottomTab';
 
@@ -33,6 +34,8 @@ const App_ = () => {
             <Stack.Screen name="DrugSearchScreen" component={DrugSearchScreen} />
             <Stack.Screen name="FavoriteDrugScreen" component={FavoriteDrugScreen} />
             <Stack.Screen name="MyDrugListScreen" component={MyDrugListScreen} />
+
+            <Stack.Screen name="PrescriptionListScreen" component={PrescriptionListScreen} />
             
         </Stack.Navigator>
     );

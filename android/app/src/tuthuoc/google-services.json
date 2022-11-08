@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "254206309600",
+    "project_id": "tuthuoccuatoi-ddcec",
+    "storage_bucket": "tuthuoccuatoi-ddcec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254206309600:android:784413b262374ab98dcc85",
+        "android_client_info": {
+          "package_name": "com.daunut.tuthuoccuatoi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254206309600-r74tkab6ac2chqqbrtpl42sj5hs1dek8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1VdN9NIO7d1zJb3GnQGHGqBf4j_X8mCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254206309600-r74tkab6ac2chqqbrtpl42sj5hs1dek8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "254206309600-1u69p2g46crn7i9mhat9pvjesbeag4lo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.daunut.tuthuoccuatoi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -124,14 +124,14 @@ const MAIN_HomeScreen = () => {
                 <View style={{padding: 20, backgroundColor: '#1479FF', height: '20%',marginHorizontal: 20, borderRadius: 10}}>
                     <View style={{flexDirection: 'row'}}>
                         <View style={{flexDirection: 'column'}}>
-                            <Text style={{fontSize: 20, color: '#FFF', fontWeight: 'bold'}}>Tình hình COVID-19</Text>
-                            <Text style={{color: '#FFF', paddingTop: 15}}>Thông tin về y tế.</Text>
+                            <Text style={{fontSize: 20, color: '#FFF', fontWeight: 'bold'}}>TỦ THUỐC CÁ NHÂN</Text>
+                            <Text style={{color: '#FFF', paddingTop: 15}}>Quản lý tủ thuốc cùa bạn.</Text>
                             <Button
-                                title="Chi tiết"
+                                title="Danh sách"
                                 buttonStyle={{borderRadius: 5, backgroundColor: '#2EC28B', width: 120, marginTop: 20, marginLeft: 5}}
                                 titleStyle={{fontSize: 14}}
                                 onPress={() => {
-                                    
+                                    navigation.navigate('DrugSearchScreen');
                                 }}
                             />
                         </View>

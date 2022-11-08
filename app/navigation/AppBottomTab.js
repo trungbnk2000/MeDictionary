@@ -13,6 +13,7 @@ import { MAIN_HomeScreen, ArticleListScreen } from '../screens/main';
 import { DrugSearchScreen } from '../screens/drug';
 import FavoriteDrugScreen from '../screens/favorite';
 import MyDrugListScreen from '../screens/medicalbox/MyDrugListScreen';
+import PrescriptionListScreen from '../screens/prescription';
 
 
 const AppBottomTab = () => {
@@ -73,10 +74,26 @@ const AppBottomTab = () => {
         component={MyDrugListScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Tủ thuốc cá nhân',
+          tabBarLabel: 'Tủ thuốc',
           tabBarIcon: ({focused, tintColor, size}) => (
             <Icon
               name="star-of-life"
+              size={isTablet ? 24 : 22}
+              color={focused ? Colors.primary : '#757E83'}
+              solid={focused ? true : false}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="PrescriptionListScreen"
+        component={PrescriptionListScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Đơn thuốc',
+          tabBarIcon: ({focused, tintColor, size}) => (
+            <Icon
+              name="prescription-bottle"
               size={isTablet ? 24 : 22}
               color={focused ? Colors.primary : '#757E83'}
               solid={focused ? true : false}

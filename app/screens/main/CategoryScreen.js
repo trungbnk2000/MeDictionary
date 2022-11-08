@@ -114,7 +114,7 @@ const CategoryScreen = () => {
                     <Text style={{fontSize: 25, color: '#FFF', fontWeight: '600'}}>
                         Danh mục thuốc
                     </Text>
-                    <Image source={require('../../assets/images/profile.png')} style={{height: 42, width: 42}} />
+                    <Image source={require('../../assets/images/doctor_profile.png')} style={{height: 42, width: 42}} />
                 </View>
                 <View style={{height: 700}}>
                     <FlatList 

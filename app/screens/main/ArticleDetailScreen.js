@@ -41,7 +41,7 @@ const ArticleDetailScreen = () => {
                         </Text>
                         <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10}}>
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                <Image source={require('../../assets/images/profile.png')} style={{height: 35, width: 35}} />
+                                <Image source={require('../../assets/images/doctor_profile.png')} style={{height: 35, width: 35}} />
                                 <Text style={{paddingLeft: 10, fontSize: 15, color: '#A7AFBC'}}>{data.author}</Text>
                             </View>
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
