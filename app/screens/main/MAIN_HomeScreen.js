@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { companyData } from '../../data/CompanyData';
 import { drugData } from '../../data/DrugData';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import Carousel from './components/Carousel';
 
 const {width} = Dimensions.get('window');
 
@@ -112,7 +113,7 @@ const MAIN_HomeScreen = () => {
                         <Text style={{fontSize: 25, color: '#36596A', fontWeight: '600'}}>
                             Xin chào
                         </Text>
-                        <Image source={require('../../assets/images/profile.png')} style={{height: 42, width: 42}} />
+                        <Image source={require('../../assets/images/doctor_profile.jpeg')} style={{height: 42, width: 42, borderRadius: 42}} />
                     </View>
                     <View style={{marginTop: 10, height: 60, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#FFF', borderRadius: 5, padding: 10}}>
                         <TextInput value={searchFilter} onChangeText={(value) => setSearchFilter(value)} placeholder='Tìm kiếm thuốc' placeholderTextColor={'#ABAEBE'} style={{flex: 8, height: '100%', fontSize: 18}}/>
@@ -121,25 +122,7 @@ const MAIN_HomeScreen = () => {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{padding: 20, backgroundColor: '#1479FF', height: '20%',marginHorizontal: 20, borderRadius: 10}}>
-                    <View style={{flexDirection: 'row'}}>
-                        <View style={{flexDirection: 'column'}}>
-                            <Text style={{fontSize: 20, color: '#FFF', fontWeight: 'bold'}}>TỦ THUỐC CÁ NHÂN</Text>
-                            <Text style={{color: '#FFF', paddingTop: 15}}>Quản lý tủ thuốc cùa bạn.</Text>
-                            <Button
-                                title="Danh sách"
-                                buttonStyle={{borderRadius: 5, backgroundColor: '#2EC28B', width: 120, marginTop: 20, marginLeft: 5}}
-                                titleStyle={{fontSize: 14}}
-                                onPress={() => {
-                                    navigation.navigate('DrugSearchScreen');
-                                }}
-                            />
-                        </View>
-                        <View>
-                            <Image source={require('../../assets/images/family.png')} />
-                        </View>
-                    </View>
-                </View>
+                <Carousel />
                 <View style={{flexDirection: 'column', padding: 20}}>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 0}}>
                         <Text style={{fontSize: 20, color: '#36596A', fontWeight: '600'}}>

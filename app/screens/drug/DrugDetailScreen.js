@@ -47,7 +47,7 @@ const DrugDetailScreen = () => {
                             <FontAwesome name='file-pdf' size={25} light color={'#fff'} />
                         </TouchableOpacity>
                     ) : (
-                        <Image source={require('../../assets/images/profile.png')} style={{height: 42, width: 42}} />
+                        <Image source={require('../../assets/images/doctor_profile.jpeg')} style={{height: 42, width: 42, borderRadius: 42}} />
                     )}
                 </View>
                 <View style={{height: 500}}>
@@ -63,12 +63,35 @@ const DrugDetailScreen = () => {
                             }
                         }
                     })}}>
-                        <Image source={require('../../assets/images/Article1.png')} style={{borderRadius: 10, height: '100%', width: '100%'}} resizeMode='cover'/>
+                        <Image source={require('../../assets/images/medicine.png')} style={{borderRadius: 10, height: '100%', width: '100%'}} resizeMode='contain' />
                     </View>
                     <View style={{flex: 1, flexDirection: 'column', paddingTop: 10}}>
-                        <Text style={{fontSize: 25, fontWeight: 'bold', color: '#36596A'}}>Tên thuốc: {data.tenThuoc}</Text>
-                        <Text style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC'}}>Số đăng ký: {data.soDangKy}</Text>
-                        <Text style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC'}}>Dạng bào chế: {data.baoChe}</Text>
+                    <View>
+              <Text
+                style={{fontSize: 25, fontWeight: 'bold', color: '#36596A'}}>
+                {'Tên thuốc: '}<Text style={{fontSize: 25, color: '#36596A'}}>
+                {data?.tenThuoc ?? ''}
+              </Text>
+              </Text>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Text
+                style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC', fontWeight: 'bold'}}>
+                {'Số đăng ký: '}
+              </Text>
+              <Text style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC'}}>
+                {data?.soDangKy ?? ''}
+              </Text>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Text
+                style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC', fontWeight: 'bold'}}>
+                {'Dạng bào chế: '}
+              </Text>
+              <Text style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC'}}>
+                {data?.baoChe ?? ''}
+              </Text>
+            </View>
                     </View>
                 </View>
             </View>

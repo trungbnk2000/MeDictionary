@@ -8,7 +8,7 @@ import { MAIN_HomeScreen,ArticleDetailScreen, CategoryScreen, ProductListScreen,
 import { DrugSearchScreen, DrugDetailScreen } from '../screens/drug';
 import FavoriteDrugScreen from '../screens/favorite';
 import MyDrugListScreen from '../screens/medicalbox/MyDrugListScreen';
-import PrescriptionListScreen from '../screens/prescription';
+import {PrescriptionListScreen, PrescriptionAddScreen, PrescriptionDetailScreen, PrescriptionDrugDetailScreen} from '../screens/prescription';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import AppBottomTab from './AppBottomTab';
 
@@ -20,23 +20,19 @@ const App_ = () => {
 
     return (
         <Stack.Navigator
-            initialRouteName="MAIN_HomeScreen"
+            initialRouteName="DrugSearchScreen"
             screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="MAIN_HomeScreen" component={AppBottomTab} />
-            <Stack.Screen name="CategoryScreen" component={CategoryScreen} />
+            <Stack.Screen name="DrugSearchScreen" component={AppBottomTab} />
             <Stack.Screen name="ProductListScreen" component={ProductListScreen} />
 
-            <Stack.Screen name="DetailProductScreen" component={DetailProductScreen} />
             <Stack.Screen name="DrugDetailScreen" component={DrugDetailScreen} />
-
-            <Stack.Screen name="ArticleListScreen" component={ArticleListScreen} />
-            <Stack.Screen name="ArticleDetailScreen" component={ArticleDetailScreen} />
-            <Stack.Screen name="DrugSearchScreen" component={DrugSearchScreen} />
             <Stack.Screen name="FavoriteDrugScreen" component={FavoriteDrugScreen} />
             <Stack.Screen name="MyDrugListScreen" component={MyDrugListScreen} />
 
             <Stack.Screen name="PrescriptionListScreen" component={PrescriptionListScreen} />
-            
+            <Stack.Screen name="PrescriptionAddScreen" component={PrescriptionAddScreen} />
+            <Stack.Screen name="PrescriptionDetailScreen" component={PrescriptionDetailScreen} />
+            <Stack.Screen name="PrescriptionDrugDetailScreen" component={PrescriptionDrugDetailScreen} />
         </Stack.Navigator>
     );
 };

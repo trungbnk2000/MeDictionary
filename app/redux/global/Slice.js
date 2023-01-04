@@ -5,9 +5,11 @@ const initialState = {
   userInfo: null,
   bookmarks: [],
   medicalBox: [],
+  prescription: [],
   listLoading: false,
   actionsLoading: false,
   error: null,
+  random: 0,
 };
 export const callTypes = {
   list: 'list',
@@ -26,7 +28,9 @@ export const globalSlice = createSlice({
         state.actionsLoading = false;
       }
     },
-
+    setRandom: (state, action) => {
+      state.random = Math.random();
+    },
     startCall: (state, action) => {
       state.error = null;
       if (action.payload.callType === callTypes.list) {
@@ -35,7 +39,35 @@ export const globalSlice = createSlice({
         state.actionsLoading = true;
       }
     },
-
+    setPrescription: (state, action) => {
+      state.prescription = action?.payload;
+    },
+    removePrescriptionIndex: (state, action) => {
+      var index = action?.payload;
+      var temp = [...state.prescription];
+      temp.splice(index, 1);
+      state.prescription = temp;
+    },
+    addPrescriptionItem: (state, action) => {
+      var newItem = action?.payload;
+      var temp = state.prescription || [];
+      temp.push(newItem);
+      state.prescription = temp;
+    },
+    updatePrescription: (state, action) => {
+      var index = action?.payload.index;
+      var temp = [...state.prescription];
+      temp[index].drugList = action?.payload.drugList;
+      state.prescription = temp;
+    },
+    addDrugPrescription: (state, action) => {
+      var drug = action?.payload.drug;
+      var prescriptionIndex = action?.payload.index;
+      var temp = [...state.prescription];
+      temp[prescriptionIndex]?.drugList.push(drug);
+      console.log(drug);
+      state.prescription = temp;
+    },
     setBookmarks: (state, action) => {
       state.bookmarks = action?.payload;
     },

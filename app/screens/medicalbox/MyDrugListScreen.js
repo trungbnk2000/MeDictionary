@@ -92,6 +92,7 @@ const MyDrugListScreen = () => {
   const [searchFilter, setSearchFilter] = useState('');
   const dispatch = useDispatch();
   const medicalBox = useSelector(state => state.global.medicalBox);
+  const prescription = useSelector(state => state.global.prescription);
   const [footerLoad, setFooterLoad] = useState(false);
   const [listFavoriteDrug, setListFavoriteDrug] = useState([]);
   const isClose = useRef(false);
@@ -100,7 +101,7 @@ const MyDrugListScreen = () => {
 
   const renderRightActions = (progress, dragX, item, index) => {
     const forceChangeAmount = newAmount => {
-      if (newAmount === 0) {
+      if (newAmount < 1) {
         Alert.alert(
           'Xác nhận xoá thuốc khỏi tủ thuốc của bạn!',
           'Sau khi xoá, những dự liệu về thuốc trước đây cũng bị xoá! Bạn có chắc chắn xoá thuốc này không?',
@@ -193,19 +194,7 @@ const MyDrugListScreen = () => {
             marginHorizontal: MARGIN_ITEM_HORIZONTAL,
             marginTop: MARGIN_ITEM_TOP,
             borderRadius: BORDER_RADIUS,
-            padding: 10,
-            ...Platform.select({
-              android: {elevation: 3},
-              ios: {
-                shadowColor: '#a8bed2',
-                shadowOpacity: 1,
-                shadowRadius: 6,
-                shadowOffset: {
-                  width: 2,
-                  height: 2,
-                },
-              },
-            }),
+            padding: 10
           }}>
           <View
             style={{
@@ -329,10 +318,7 @@ const MyDrugListScreen = () => {
           <Text style={{fontSize: 25, color: '#FFF', fontWeight: '600'}}>
             Tủ thuốc cá nhân
           </Text>
-          <Image
-            source={require('../../assets/images/profile.png')}
-            style={{height: 42, width: 42}}
-          />
+          <Image source={require('../../assets/images/doctor_profile.jpeg')} style={{height: 42, width: 42, borderRadius: 42}} />
         </View>
         <View
           style={{

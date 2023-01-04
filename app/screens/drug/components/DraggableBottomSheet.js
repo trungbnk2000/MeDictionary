@@ -147,14 +147,14 @@ const DraggableBottomSheet = (props) => {
                             </View>
                         ) : (
                             <View>
-                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                {/* <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <Text style={{color: '#36596A', fontSize: 16, fontWeight: 'bold'}}>Giá bán buôn: </Text>
                                     <Text style={{color: '#A7AFBC', fontSize: 16}}></Text>
                                 </View>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <Text style={{color: '#36596A', fontSize: 16, fontWeight: 'bold'}}>Giá kê khai: </Text>
                                     <Text style={{color: '#A7AFBC', fontSize: 16}}></Text>
-                                </View>
+                                </View> */}
                             </View>
                         )
                     }

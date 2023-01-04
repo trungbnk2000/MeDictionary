@@ -13,46 +13,38 @@ import { MAIN_HomeScreen, ArticleListScreen } from '../screens/main';
 import { DrugSearchScreen } from '../screens/drug';
 import FavoriteDrugScreen from '../screens/favorite';
 import MyDrugListScreen from '../screens/medicalbox/MyDrugListScreen';
-import PrescriptionListScreen from '../screens/prescription';
+import {PrescriptionListScreen} from '../screens/prescription';
 
 
 const AppBottomTab = () => {
   return (
     <Tab.Navigator
       headerMode={'none'}
-      initialRouteName="HomeScreen"
+      initialRouteName="DrugSearchScreen"
       screenOptions={{
         tabBarShowLabel: true,
         tabBarActiveBackgroundColor: '#FFF',
         tabBarInactiveBackgroundColor: '#FFF',
         tabBarActiveTintColor: Colors.primary,
-        tabBarInactiveTintColor: '#757E83',
+        tabBarInactiveTintColor: '#ABAEBE',
         tabBarLabelStyle: {
           fontSize: 10,
           fontWeight: '400',
         },
-        tabBarStyle: {paddingHorizontal: isTablet ? 100 : 0, backgroundColor: '#FFFFFF'},
+        tabBarStyle: {paddingHorizontal: isTablet ? 100 : 0, backgroundColor: '#FFFFFF', ...Platform.select({
+          android: {elevation: 3},
+          ios: {
+            shadowColor: '#a8bed2',
+            shadowOpacity: 1,
+            shadowRadius: 6,
+            shadowOffset: {
+              width: 2,
+              height: 2,
+            },
+          },
+        })},
       }}
       backBehavior={'initialRoute'}>
-      <Tab.Screen
-        headerMode={'none'}
-        name="HomeScreen"
-        component={MAIN_HomeScreen}
-        options={{
-          headerShown: false,
-          tabBarLabel: 'Trang chủ',
-          tabBarIcon: ({focused, tintColor, size}) => (
-            <View>
-              <Icon
-                name="home"
-                size={isTablet ? 24 : 22}
-                color={focused ? Colors.primary : '#757E83'}
-                solid={focused ? true : false}
-              />
-            </View>
-          ),
-        }}
-      />
       <Tab.Screen
         name="DrugSearchScreen"
         component={DrugSearchScreen}
@@ -63,7 +55,7 @@ const AppBottomTab = () => {
             <Icon
               name="capsules"
               size={isTablet ? 24 : 22}
-              color={focused ? Colors.primary : '#757E83'}
+              color={focused ? Colors.primary : '#ABAEBE'}
               solid={focused ? true : false}
             />
           ),
@@ -79,7 +71,7 @@ const AppBottomTab = () => {
             <Icon
               name="star-of-life"
               size={isTablet ? 24 : 22}
-              color={focused ? Colors.primary : '#757E83'}
+              color={focused ? Colors.primary : '#ABAEBE'}
               solid={focused ? true : false}
             />
           ),
@@ -95,7 +87,7 @@ const AppBottomTab = () => {
             <Icon
               name="prescription-bottle"
               size={isTablet ? 24 : 22}
-              color={focused ? Colors.primary : '#757E83'}
+              color={focused ? Colors.primary : '#ABAEBE'}
               solid={focused ? true : false}
             />
           ),
@@ -111,7 +103,7 @@ const AppBottomTab = () => {
             <Icon
               name="heart"
               size={isTablet ? 24 : 22}
-              color={focused ? Colors.primary : '#757E83'}
+              color={focused ? Colors.primary : '#ABAEBE'}
               solid={focused ? true : false}
             />
           ),

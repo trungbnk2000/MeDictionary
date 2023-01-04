@@ -44,18 +44,7 @@ const FavoriteDrugScreen = () => {
         var check = bookmarks?.findIndex(i => i.id == item?.id);
         
         return (
-            <TouchableOpacity onPress={() => navigation.navigate('DrugDetailScreen', {data: item})} style={{backgroundColor: '#FFF',justifyContent: 'space-evenly', width: width - 20*2, height: height/4 - 20*2 , marginHorizontal: 20, marginTop: 25, borderRadius: 10, padding: 10, ...Platform.select({
-                android: {elevation: 3},
-                ios: {
-                    shadowColor: '#a8bed2',
-                    shadowOpacity: 1,
-                    shadowRadius: 6,
-                    shadowOffset: {
-                        width: 2,
-                        height: 2,
-                    }
-                }
-            })}}>
+            <TouchableOpacity onPress={() => navigation.navigate('DrugDetailScreen', {data: item})} style={{backgroundColor: '#FFF',justifyContent: 'space-evenly', width: width - 20*2, height: height/4 - 20*2 , marginHorizontal: 20, marginTop: 25, borderRadius: 10, padding: 10 }}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <TouchableOpacity onPress={() => {
                         handleRemoveBookmark(check);
@@ -108,7 +97,7 @@ const FavoriteDrugScreen = () => {
                     <Text style={{fontSize: 25, color: '#FFF', fontWeight: '600'}}>
                         Thuốc yêu thích
                     </Text>
-                    <Image source={require('../../assets/images/profile.png')} style={{height: 42, width: 42}} />
+                    <Image source={require('../../assets/images/doctor_profile.jpeg')} style={{height: 42, width: 42, borderRadius: 42}} />
                 </View>
                 <View style={{marginTop: 20, height: Platform.OS === 'ios' ? '35%' : '50%', backgroundColor: '#FFF', justifyContent: 'space-between', flexDirection: 'row', borderRadius: 10, padding: 10}}>
                     <TextInput value={searchFilter} onChangeText={(value) => setSearchFilter(value)} placeholder='Tìm kiếm thuốc' placeholderTextColor={'#ABAEBE'} style={{flex: 8, height: '100%', fontSize: 18}}/>
