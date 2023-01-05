@@ -8,6 +8,7 @@ import { MAIN_HomeScreen,ArticleDetailScreen, CategoryScreen, ProductListScreen,
 import { DrugSearchScreen, DrugDetailScreen } from '../screens/drug';
 import FavoriteDrugScreen from '../screens/favorite';
 import MyDrugListScreen from '../screens/medicalbox/MyDrugListScreen';
+import ChatScreen from '../screens/openAi';
 import {PrescriptionListScreen, PrescriptionAddScreen, PrescriptionDetailScreen, PrescriptionDrugDetailScreen} from '../screens/prescription';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import AppBottomTab from './AppBottomTab';
@@ -20,10 +21,11 @@ const App_ = () => {
 
     return (
         <Stack.Navigator
-            initialRouteName="DrugSearchScreen"
+            initialRouteName="AppBottomTab"
             screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="DrugSearchScreen" component={AppBottomTab} />
+            <Stack.Screen name="AppBottomTab" component={AppBottomTab} />
             <Stack.Screen name="ProductListScreen" component={ProductListScreen} />
+
 
             <Stack.Screen name="DrugDetailScreen" component={DrugDetailScreen} />
             <Stack.Screen name="FavoriteDrugScreen" component={FavoriteDrugScreen} />
@@ -33,6 +35,8 @@ const App_ = () => {
             <Stack.Screen name="PrescriptionAddScreen" component={PrescriptionAddScreen} />
             <Stack.Screen name="PrescriptionDetailScreen" component={PrescriptionDetailScreen} />
             <Stack.Screen name="PrescriptionDrugDetailScreen" component={PrescriptionDrugDetailScreen} />
+
+            <Stack.Screen name="ChatScreen" component={ChatScreen} />
         </Stack.Navigator>
     );
 };

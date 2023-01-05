@@ -1,60 +1,70 @@
 import React from 'react';
-import { View, Text, SafeAreaView, Image, TouchableOpacity, Dimensions, StyleSheet, TextInput, ActivityIndicator, Alert} from 'react-native';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+  StyleSheet,
+  TextInput,
+  ActivityIndicator,
+  Alert,
+  KeyboardAvoidingView,
+} from 'react-native';
+import {useState} from 'react';
+import {useEffect} from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5Pro';
-import { useNavigation } from '@react-navigation/native';
-const {width, height} = Dimensions.get("window");
-import { useSelector, useDispatch} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
+const {width, height} = Dimensions.get('window');
+import {useSelector, useDispatch} from 'react-redux';
 import * as actions from '../../redux/global/Actions';
-import { ScrollView } from 'react-native-gesture-handler';
-import { showMessage } from 'react-native-flash-message';
-import { useRoute } from '@react-navigation/native';
-
+import {ScrollView} from 'react-native-gesture-handler';
+import {showMessage} from 'react-native-flash-message';
+import {useRoute} from '@react-navigation/native';
 
 const PresciptionDetailScreen = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    const route = useRoute();
-    const data = route?.params?.data ?? {};
-    const navigation = useNavigation();
-    const [searchFilter, setSearchFilter] = useState('');
-    const dispatch = useDispatch();
-    const random = useSelector((state) => state.global.random);
-    const prescriptionList = useSelector(state => state.global.prescription);
-    const [footerLoad, setFooterLoad] = useState(false);
-    const [listFavoriteDrug, setListFavoriteDrug] = useState([]);
-    const [prescriptionName, setPrescriptionName] = useState('');
-    const [prescriptionPatient, setPrescriptionPatient] = useState('');
-    const [createDate, setCreateDate] = useState('');
-    const [expireDate, setExpireDate] = useState('');
-    const [description, setDescription] = useState('');
-    const [drugList, setDrugList] = useState([]);
-    
-    const handleDelete = () => {
-      var prescriptionId = route.params.data.id;
-      prescriptionList.map((item, index) => {
-        if(item.id === prescriptionId){
-          dispatch(actions.removePrescriptionIndex(index));
-        }
-      })
-      showMessage({
-        message: 'Thành công',
-        description: 'Xoá thành công đơn thuốc!',
-        type: 'success',
-      });
-      navigation.goBack();
-    }
-    
-    useEffect(() => {
-        console.log(data.id);
-        prescriptionList.map((item, index) => {
-          if(item.id === data.id){
-            setDrugList(item.drugList ?? []);
-          }
-        })
-    },[prescriptionList, random]);
+  const [isLoading, setIsLoading] = useState(false);
+  const route = useRoute();
+  const data = route?.params?.data ?? {};
+  const navigation = useNavigation();
+  const [searchFilter, setSearchFilter] = useState('');
+  const dispatch = useDispatch();
+  const random = useSelector(state => state.global.random);
+  const prescriptionList = useSelector(state => state.global.prescription);
+  const [footerLoad, setFooterLoad] = useState(false);
+  const [listFavoriteDrug, setListFavoriteDrug] = useState([]);
+  const [prescriptionName, setPrescriptionName] = useState('');
+  const [prescriptionPatient, setPrescriptionPatient] = useState('');
+  const [createDate, setCreateDate] = useState('');
+  const [expireDate, setExpireDate] = useState('');
+  const [description, setDescription] = useState('');
+  const [drugList, setDrugList] = useState([]);
 
-    return (
+  const handleDelete = () => {
+    var prescriptionId = route.params.data.id;
+    prescriptionList.map((item, index) => {
+      if (item.id === prescriptionId) {
+        dispatch(actions.removePrescriptionIndex(index));
+      }
+    });
+    showMessage({
+      message: 'Thành công',
+      description: 'Xoá thành công đơn thuốc!',
+      type: 'success',
+    });
+    navigation.goBack();
+  };
+
+  useEffect(() => {
+    prescriptionList.map((item, index) => {
+      if (item.id === data.id) {
+        setDrugList(item.drugList ?? []);
+      }
+    });
+  }, [prescriptionList, random]);
+
+  return (
       <View
         style={{
           flex: 1,
@@ -86,9 +96,12 @@ const PresciptionDetailScreen = () => {
               <FontAwesome name={'arrow-left'} size={25} color="#FFF" />
             </TouchableOpacity>
             <Text style={{fontSize: 25, color: '#FFF', fontWeight: '600'}}>
-              Thêm đơn thuốc
+              Chi tiết đơn thuốc
             </Text>
-            <Image source={require('../../assets/images/doctor_profile.jpeg')} style={{height: 42, width: 42, borderRadius: 42}} />
+            <Image
+              source={require('../../assets/images/doctor_profile.jpeg')}
+              style={{height: 42, width: 42, borderRadius: 42}}
+            />
           </View>
           <View
             style={{
@@ -132,54 +145,72 @@ const PresciptionDetailScreen = () => {
             <ScrollView style={{flex: 1, marginBottom: '25%'}}>
               {drugList.length > 0 ? (
                 <>
-                {drugList.map((item, index) => {
+                  {drugList.map((item, index) => {
                     return (
-                        <View
+                      <View
                         key={index}
                         style={{
-                        backgroundColor: 'white',
-                        marginHorizontal: 20,
-                        marginTop: 20,
-                        padding: 15,
-                        borderRadius: 10,
-                        borderColor: '#EBEBEB',
-                        borderWidth: 1,
-                        flexDirection: 'row'
+                          backgroundColor: 'white',
+                          marginHorizontal: 20,
+                          marginTop: 20,
+                          padding: 15,
+                          borderRadius: 10,
+                          borderColor: '#EBEBEB',
+                          borderWidth: 1,
+                          flexDirection: 'row',
                         }}>
                         <View style={{flex: 6}}>
-                            <Text
+                          <Text
                             style={{
-                                color: '#36596A',
-                                fontWeight: 'bold',
-                                fontSize: 16,
+                              color: '#36596A',
+                              fontWeight: 'bold',
+                              fontSize: 16,
                             }}>
                             {item.tenThuoc}
-                            </Text>
-                            <Text
+                          </Text>
+                          <Text
                             style={{
-                                color: '#A7AFBC',
-                                fontSize: 14,
-                                marginTop: 10
+                              color: '#A7AFBC',
+                              fontSize: 14,
+                              marginTop: 10,
                             }}>
                             Ngày {item.perDay} lần, mỗi lần {item.unit}
-                            </Text>
+                          </Text>
                         </View>
-                        <TouchableOpacity onPress={() => {
-                            navigation.navigate('PrescriptionDrugDetailScreen', {drugEdit: {prescription: data, drugIndex: index}});
-                        }} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                            <FontAwesome name={'chevron-right'} size={20} color="#36596A" />
+                        <TouchableOpacity
+                          onPress={() => {
+                            navigation.navigate(
+                              'PrescriptionDrugDetailScreen',
+                              {
+                                drugEdit: {
+                                  prescription: data,
+                                  drugIndex: index,
+                                },
+                              },
+                            );
+                          }}
+                          style={{
+                            flex: 1,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                          }}>
+                          <FontAwesome
+                            name={'chevron-right'}
+                            size={20}
+                            color="#36596A"
+                          />
                         </TouchableOpacity>
-                    </View>
-                    )
-                })}
+                      </View>
+                    );
+                  })}
                 </>
               ) : (
                 <></>
               )}
               <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('DrugSearchScreen', {prescription: data});
-              }}
+                onPress={() => {
+                  navigation.navigate('DrugSearchScreen', {prescription: data});
+                }}
                 style={{
                   marginHorizontal: 20,
                   marginTop: 20,
@@ -219,20 +250,20 @@ const PresciptionDetailScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
-    );
+  );
 };
 
 export default PresciptionDetailScreen;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        position: 'absolute',  
-        width: '100%',
-        height: '10%',
-        bottom: 0,
-        backgroundColor: '#fff',
-        borderTopLeftRadius: 32,
-        borderTopRightRadius: 32
-    }
-})
+  container: {
+    flex: 1,
+    position: 'absolute',
+    width: '100%',
+    height: '10%',
+    bottom: 0,
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 32,
+    borderTopRightRadius: 32,
+  },
+});

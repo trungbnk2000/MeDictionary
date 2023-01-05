@@ -65,7 +65,18 @@ export const globalSlice = createSlice({
       var prescriptionIndex = action?.payload.index;
       var temp = [...state.prescription];
       temp[prescriptionIndex]?.drugList.push(drug);
-      console.log(drug);
+      state.prescription = temp;
+    },
+    updateDrugPrescription: (state, action) => {
+      var drug = action?.payload.drug;
+      var prescriptionIndex = action?.payload.index;
+      var temp = [...state.prescription];
+      temp[prescriptionIndex]?.drugList.map((item, index) => {
+        if(item.id === drug.id){
+          item.unit = drug.unit;
+          item.perDay = drug.perDay;
+        }
+      })
       state.prescription = temp;
     },
     setBookmarks: (state, action) => {

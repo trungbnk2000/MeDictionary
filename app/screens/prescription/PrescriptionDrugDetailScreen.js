@@ -9,6 +9,7 @@ import {
   ScrollView,
   Animated,
   Linking,
+  KeyboardAvoidingView,
   StyleSheet,
 } from 'react-native';
 import {useState} from 'react';
@@ -51,8 +52,13 @@ const MainScreen = () => {
       type: 'success',
     });
     dispatch(actions.setRandom());
-    navigation.goBack();
-    navigation.goBack();
+    var _prescription = {};
+    prescriptionList.map((item, index) => {
+      if(item.id === route.params.prescription.id){
+        _prescription = item;
+      }
+    });
+    navigation.navigate('PrescriptionDetailScreen', {data: _prescription});
   }
 
   const deleteDrug = () => {
@@ -61,7 +67,6 @@ const MainScreen = () => {
     var _drugList = [];
     route.params.drugEdit.prescription.drugList.map((item, index) => {
       if(index === drugIndex){
-
       }
       else{
         _drugList.push(item);
@@ -72,7 +77,6 @@ const MainScreen = () => {
         item.drugList = _drugList;
       }
     })
-    console.log(route.params);
     showMessage({
       message: 'Thành công',
       description: 'Xoá thành công khỏi đơn thuốc!',
@@ -80,6 +84,33 @@ const MainScreen = () => {
     });
     dispatch(actions.setRandom());
     navigation.goBack();
+  }
+
+  const updateDrug = () => {
+    var prescriptionIndex = -1;
+    prescriptionList.map((item, index) => {
+      if(item.id === route.params.drugEdit.prescription.id){
+        prescriptionIndex = index;
+      }
+    })
+    var payload = {
+      drug: {...route.params.drugEdit.prescription.drugList[route.params.drugEdit.drugIndex], perDay: perDay, unit: unit},
+      index: prescriptionIndex,
+    }
+    dispatch(actions.updateDrugPrescription(payload));
+    showMessage({
+      message: 'Thành công',
+      description: 'Thêm thành công vào đơn thuốc!',
+      type: 'success',
+    });
+    dispatch(actions.setRandom());
+    var _prescription = {};
+    prescriptionList.map((item, index) => {
+      if(item.id === route.params.drugEdit.prescription.id){
+        _prescription = item;
+      }
+    });
+    navigation.navigate('PrescriptionDetailScreen', {data: _prescription});
   }
 
   useEffect(() => {
@@ -92,12 +123,17 @@ const MainScreen = () => {
         })
     }
     else if(route.params.drugEdit){
-        setDrugData(route.params.drugEdit.prescription.drugList[route.params.drugEdit.drugIndex]);
-        setPerDay(route.params.drugEdit.prescription.drugList[route.params.drugEdit.drugIndex]?.perDay ?? 0);
-        setUnit(route.params.drugEdit.prescription.drugList[route.params.drugEdit.drugIndex]?.unit ?? '');
+        var drugIndex = route.params.drugEdit.drugIndex;
+        var prescriptionId = route.params.drugEdit.prescription.id;
+        prescriptionList.map((item, index) => {
+          if(item.id === prescriptionId){
+            setDrugData(item.drugList[drugIndex]);
+            setPerDay(item.drugList[drugIndex]?.perDay);
+            setUnit(item.drugList[drugIndex]?.unit); 
+          }
+        })
     }
-  }, []);
-
+  }, [prescriptionList]);
 
   return (
     <View style={{flex: 1, backgroundColor: '#F4F5F9'}}>
@@ -226,7 +262,7 @@ const MainScreen = () => {
           </ScrollView>
         </View>
       </View>
-      <View style={styles.optionBar}>
+      <KeyboardAvoidingView style={styles.optionBar}>
         <View style={{paddingHorizontal: 20, paddingTop: 20}}>
           <Text style={{color: '#36596A', fontWeight: 'bold', fontSize: 18}}>
             Liều lượng
@@ -270,11 +306,13 @@ const MainScreen = () => {
           </View>
         </View>
         <View style={{flex: 3}}></View>
-      </View>
+      </KeyboardAvoidingView>
       {route.params.drugEdit ? (
         <View style={styles.container}>
           <TouchableOpacity
-            onPress={() => {}}
+            onPress={() => {
+              updateDrug();
+            }}
             style={{
               flex: 1,
               backgroundColor: '#F4F5F9',

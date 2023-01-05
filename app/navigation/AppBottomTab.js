@@ -9,10 +9,10 @@ import Icon from 'react-native-vector-icons/FontAwesome5Pro';
 import DeviceInfo from 'react-native-device-info';
 let isTablet = DeviceInfo.isTablet();
 
-import { MAIN_HomeScreen, ArticleListScreen } from '../screens/main';
 import { DrugSearchScreen } from '../screens/drug';
 import FavoriteDrugScreen from '../screens/favorite';
 import MyDrugListScreen from '../screens/medicalbox/MyDrugListScreen';
+import ChatScreen from '../screens/openAi';
 import {PrescriptionListScreen} from '../screens/prescription';
 
 
@@ -102,6 +102,22 @@ const AppBottomTab = () => {
           tabBarIcon: ({focused, tintColor, size}) => (
             <Icon
               name="heart"
+              size={isTablet ? 24 : 22}
+              color={focused ? Colors.primary : '#ABAEBE'}
+              solid={focused ? true : false}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ChatScreen"
+        component={ChatScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Trợ lý ảo',
+          tabBarIcon: ({focused, tintColor, size}) => (
+            <Icon
+              name="comments"
               size={isTablet ? 24 : 22}
               color={focused ? Colors.primary : '#ABAEBE'}
               solid={focused ? true : false}

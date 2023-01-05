@@ -127,7 +127,7 @@ const FavoriteDrugScreen = () => {
                         </View>
                     )}
             </View>
-        </View>
+        </View> 
     );
 };
 

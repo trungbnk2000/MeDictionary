@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, SafeAreaView, Image, TouchableOpacity, Dimensions, StyleSheet, TextInput, ActivityIndicator, Alert} from 'react-native';
+import { View, Text, SafeAreaView,KeyboardAvoidingView, Image, TouchableOpacity, Dimensions, StyleSheet, TextInput, ActivityIndicator, Alert} from 'react-native';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5Pro';
@@ -52,10 +52,6 @@ const MainScreen = () => {
         });
         navigation.navigate('PrescriptionListScreen');
     }
-    
-    useEffect(() => {
-        console.log(prescription);
-    },[prescription])
 
     return (    
         <View style={{flex:1, backgroundColor: '#F4F5F9', justifyContent: 'space-between'}}>
@@ -76,7 +72,9 @@ const MainScreen = () => {
                     </View>
                 </View>
             </View>
-            <View style={{flex:1}}>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                style={{flex: 1}}>
                 {isLoading ? (
                         <ActivityIndicator size="large" color="#fb8c00" style={{flex: 1, justifyContent: 'center'}} />
                     ):(
@@ -108,7 +106,7 @@ const MainScreen = () => {
                         </ScrollView>
 
                     )}
-            </View>
+            </KeyboardAvoidingView>
             <View style={styles.container}>
                 <TouchableOpacity onPress={() => {
                     if(prescriptionName || prescriptionPatient){

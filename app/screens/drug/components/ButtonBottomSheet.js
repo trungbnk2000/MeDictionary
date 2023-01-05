@@ -91,6 +91,36 @@ const ButtonBottomSheet = (props) => {
                     </Text>
                 </TouchableOpacity>
                 <Overlay overlayStyle={{height: '60%', width: '80%', borderRadius: 10, backgroundColor: '#F4F5F9', alignItems: 'center', padding: 20}} isVisible={visible} onBackdropPress={toggleOverlay}>
+                    <View style={{flexDirection: 'row', flex: 1, width: '100%', padding: 10}}>
+                        <View style={{flex: 1}}>
+                            <Text style={{color: '#36596A', fontSize: 16}}>Số lượng</Text>
+                            <View style={{flexDirection: 'row',marginTop: 10, backgroundColor: '#E7F2FF', height: '50%', width: '100%', alignItems: 'center', justifyContent: 'space-evenly'}}>
+                                <TouchableOpacity onPress={() => {
+                                    if(amount > 0){
+                                        setAmount(amount - 1);
+                                    }
+                                }}>
+                                    <FontAwesome name="minus" size={15} color='#1479FF' />
+                                </TouchableOpacity>
+                                <View style={{height: '60%', width: 2, backgroundColor: '#fff'}} />
+                                <Text style={{color: '#36596A', fontSize: 16}}>{amount}</Text>
+                                <View style={{height: '60%', width: 2, backgroundColor: '#fff'}} />
+                                <TouchableOpacity onPress={() => setAmount(amount + 1)}>
+                                    <FontAwesome name="plus" size={15} color='#1479FF' />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={{flex: 1}}>
+                            <View style={{justifyContent: 'center', alignItems: 'flex-end'}}>
+                                <Text style={{color: '#36596A', fontSize: 16}}>Đơn vị</Text>
+                            </View>
+                            <View style={{backgroundColor: '#fff', marginTop: 10, height: '50%', width: '100%', borderRadius: 10, padding: 5, borderRadius: 10, borderColor: '#EBEBEB', borderWidth: 1.5}}>
+                                <TextInput value={unit} onChangeText={(value) => {
+                                    setUnit(value);
+                                }} textAlign="right" style={{flex: 1}} />
+                            </View>
+                        </View>
+                    </View>
                     <View style={{width: '100%', backgroundColor: '#fff', flex: 1, borderRadius: 10, borderColor: '#EBEBEB', borderWidth: 1.5, justifyContent: 'space-evenly', paddingStart: 10}}>
                         <Text style={{color: '#ABAEBE'}}>
                             Mã thuốc
@@ -122,36 +152,6 @@ const ButtonBottomSheet = (props) => {
                         <Text style={{color: '#36596A', fontSize: 16, fontWeight: 'bold'}}>
                             {item.nuocSx}
                         </Text>
-                    </View>
-                    <View style={{flexDirection: 'row', flex: 1, width: '100%', padding: 10}}>
-                        <View style={{flex: 1}}>
-                            <Text style={{color: '#36596A', fontSize: 16}}>Số lượng</Text>
-                            <View style={{flexDirection: 'row',marginTop: 10, backgroundColor: '#E7F2FF', height: '50%', width: '100%', alignItems: 'center', justifyContent: 'space-evenly'}}>
-                                <TouchableOpacity onPress={() => {
-                                    if(amount > 0){
-                                        setAmount(amount - 1);
-                                    }
-                                }}>
-                                    <FontAwesome name="minus" size={15} color='#1479FF' />
-                                </TouchableOpacity>
-                                <View style={{height: '60%', width: 2, backgroundColor: '#fff'}} />
-                                <Text style={{color: '#36596A', fontSize: 16}}>{amount}</Text>
-                                <View style={{height: '60%', width: 2, backgroundColor: '#fff'}} />
-                                <TouchableOpacity onPress={() => setAmount(amount + 1)}>
-                                    <FontAwesome name="plus" size={15} color='#1479FF' />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                        <View style={{flex: 1}}>
-                            <View style={{justifyContent: 'center', alignItems: 'flex-end'}}>
-                                <Text style={{color: '#36596A', fontSize: 16}}>Đơn vị</Text>
-                            </View>
-                            <View style={{backgroundColor: '#fff', marginTop: 10, height: '50%', width: '100%', borderRadius: 10, padding: 5, borderRadius: 10, borderColor: '#EBEBEB', borderWidth: 1.5}}>
-                                <TextInput value={unit} onChangeText={(value) => {
-                                    setUnit(value);
-                                }} textAlign="right" style={{flex: 1}} />
-                            </View>
-                        </View>
                     </View>
                     <View style={{flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center'}}>
                         <TouchableOpacity onPress={() => {

@@ -37,4 +37,7 @@ const { actions } = globalSlice;
   };
   export const addDrugPrescription = (drug) => dispatch => {
     return dispatch(actions.addDrugPrescription(drug));
-  }
+  };
+  export const updateDrugPrescription = (drug) => dispatch => {
+    return dispatch(actions.updateDrugPrescription(drug));
+  };

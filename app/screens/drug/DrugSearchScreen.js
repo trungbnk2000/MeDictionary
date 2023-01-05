@@ -256,11 +256,8 @@ const DrugSearchScreen = () => {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.goBack();
-            }}>
-            <FontAwesome name={'arrow-left'} size={25} color="#FFF" />
+          <TouchableOpacity>
+            <FontAwesome name={'arrow-left'} size={25} color="#1479FF" />
           </TouchableOpacity>
           <Text style={{fontSize: 25, color: '#FFF', fontWeight: '600'}}>
             Danh sách thuốc
