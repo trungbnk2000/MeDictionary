@@ -24,7 +24,7 @@ import {Swipeable} from 'react-native-gesture-handler';
 import * as actions from '../../redux/global/Actions';
 
 const MARGIN_ITEM_HORIZONTAL = 20;
-const MARGIN_ITEM_TOP = 25;
+const MARGIN_ITEM_TOP = 20;
 const BORDER_RADIUS = 10;
 
 const AmountComp = ({value, forceChangeAmount, isClose, setIsClose}) => {
@@ -194,7 +194,7 @@ const MyDrugListScreen = () => {
             marginHorizontal: MARGIN_ITEM_HORIZONTAL,
             marginTop: MARGIN_ITEM_TOP,
             borderRadius: BORDER_RADIUS,
-            padding: 10
+            padding: 10,
           }}>
           <View
             style={{
@@ -296,9 +296,9 @@ const MyDrugListScreen = () => {
           flexDirection: 'column',
           padding: 25,
           backgroundColor: '#1479FF',
-          height: '28%',
-          borderBottomLeftRadius: 50,
-          borderBottomRightRadius: 50,
+          height: '25%',
+          borderBottomLeftRadius: 30,
+          borderBottomRightRadius: 30,
           paddingHorizontal: 20,
         }}>
         <View style={{height: Platform.OS === 'ios' ? '20%' : '0%'}}></View>
@@ -309,53 +309,20 @@ const MyDrugListScreen = () => {
             alignItems: 'center',
             marginTop: 0,
           }}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.goBack();
-            }}>
-            <FontAwesome name={'arrow-left'} size={25} color="#FFF" />
+          <TouchableOpacity onPress={() => {}}>
+            <FontAwesome name={'arrow-left'} size={25} color="#1479FF" />
           </TouchableOpacity>
           <Text style={{fontSize: 25, color: '#FFF', fontWeight: '600'}}>
             Tủ thuốc cá nhân
           </Text>
-          <Image source={require('../../assets/images/doctor_profile.jpeg')} style={{height: 42, width: 42, borderRadius: 42}} />
+          <View style={{height: 42, width: 42, borderRadius: 42, backgroundColor: '#1479FF'}}></View>
         </View>
-        <View
-          style={{
-            marginTop: 20,
-            height: Platform.OS === 'ios' ? '35%' : '50%',
-            backgroundColor: '#FFF',
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            borderRadius: 10,
-            paddingTop: 0,
-          }}>
-          <View
-            style={{
-              flex: 8,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <View style={{flex: 10, padding: 10}}>
-              <TextInput
-                value={searchFilter}
-                onChangeText={value => setSearchFilter(value)}
-                placeholder="Tìm kiếm thuốc"
-                placeholderTextColor={'#ABAEBE'}
-                style={{flex: 8, height: '100%', fontSize: 18}}
-              />
-            </View>
-            <TouchableOpacity
-              style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
-              <FontAwesome name="search" color={'#A7AFBC'} size={25} />
-            </TouchableOpacity>
-          </View>
-          <View style={{flex: 0.5, backgroundColor: '#1479FF'}}></View>
-          <TouchableOpacity
-            style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
-            <FontAwesome name="barcode" size={25} />
-          </TouchableOpacity>
-        </View>
+        <View style={{marginTop: 20, height: Platform.OS === 'ios' ? '40%' : '50%', backgroundColor: '#FFF', justifyContent: 'space-between', flexDirection: 'row', borderRadius: 10, padding: 10}}>
+                    <TextInput value={searchFilter} onChangeText={(value) => setSearchFilter(value)} placeholder='Tìm kiếm thuốc' placeholderTextColor={'#ABAEBE'} style={{flex: 8, height: '100%', fontSize: 18}}/>
+                    <TouchableOpacity onPress={() => {navigation.navigate('DrugSearchScreen', {dataSearch: searchFilter})}} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                        <FontAwesome name='search' size={25} color='#ABAEBE'/>
+                    </TouchableOpacity>
+                </View>
       </View>
       <View style={{flex: 1}}>
         {isLoading ? (
@@ -380,10 +347,16 @@ const MyDrugListScreen = () => {
                 footerLoad ? <ActivityIndicator /> : <View />
               }
               ListEmptyComponent={() => (
-                <Text
-                  style={{textAlign: 'center', color: '#FFF', marginTop: 10}}>
-                  Không có kết quả
-                </Text>
+                <View style={{flex: 1}}>
+                  <Text
+                    style={{
+                      textAlign: 'center',
+                      color: '#A7AFBC',
+                      marginTop: 10,
+                    }}>
+                    Không có kết quả
+                  </Text>
+                </View>
               )}
             />
           </View>

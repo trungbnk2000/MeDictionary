@@ -36,10 +36,10 @@ const AppBottomTab = () => {
           ios: {
             shadowColor: '#a8bed2',
             shadowOpacity: 1,
-            shadowRadius: 6,
+            shadowRadius: 3,
             shadowOffset: {
-              width: 2,
-              height: 2,
+              width: 1,
+              height: 1,
             },
           },
         })},
@@ -114,10 +114,10 @@ const AppBottomTab = () => {
         component={ChatScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Trợ lý ảo',
+          tabBarLabel: 'Chatbot',
           tabBarIcon: ({focused, tintColor, size}) => (
             <Icon
-              name="comments"
+              name="robot"
               size={isTablet ? 24 : 22}
               color={focused ? Colors.primary : '#ABAEBE'}
               solid={focused ? true : false}

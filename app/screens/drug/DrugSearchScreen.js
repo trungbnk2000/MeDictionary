@@ -79,10 +79,12 @@ const DrugSearchScreen = () => {
     return (
       <TouchableOpacity
         onPress={() => {
-          if(prescription){
-            navigation.navigate('PrescriptionDrugDetailScreen', {prescription: prescription, drug: item});
-          }
-          else{
+          if (prescription) {
+            navigation.navigate('PrescriptionDrugDetailScreen', {
+              prescription: prescription,
+              drug: item,
+            });
+          } else {
             navigation.navigate('DrugDetailScreen', {data: item});
           }
         }}
@@ -105,7 +107,7 @@ const DrugSearchScreen = () => {
           <Image
             source={require('../../assets/images/medicineBanner.jpeg')}
             style={{flex: 1, paddingTop: 20, width: ITEM_WIDTH, marginTop: 5}}
-            resizeMode='contain'
+            resizeMode="contain"
           />
           <TouchableOpacity
             onPress={() => {
@@ -113,7 +115,10 @@ const DrugSearchScreen = () => {
                 if (check > -1) {
                   handleRemovePrescription(check);
                 } else {
-                  navigation.navigate('PrescriptionDrugDetailScreen', {prescription: prescription, drug: item});
+                  navigation.navigate('PrescriptionDrugDetailScreen', {
+                    prescription: prescription,
+                    drug: item,
+                  });
                 }
               } else {
                 if (check > -1) {
@@ -171,7 +176,7 @@ const DrugSearchScreen = () => {
   };
 
   const initialiseList = async () => {
-    console.log(prescriptionList)
+    console.log(prescriptionList);
     setIsLoading(true);
     setAllLoaded(false);
     setPerpage(1);
@@ -244,9 +249,9 @@ const DrugSearchScreen = () => {
           flexDirection: 'column',
           padding: 25,
           backgroundColor: '#1479FF',
-          height: '28%',
-          borderBottomLeftRadius: 50,
-          borderBottomRightRadius: 50,
+          height: '25%',
+          borderBottomLeftRadius: 30,
+          borderBottomRightRadius: 30,
           paddingHorizontal: 20,
         }}>
         <View style={{height: Platform.OS === 'ios' ? '20%' : '0%'}}></View>
@@ -262,12 +267,18 @@ const DrugSearchScreen = () => {
           <Text style={{fontSize: 25, color: '#FFF', fontWeight: '600'}}>
             Danh sách thuốc
           </Text>
-          <Image source={require('../../assets/images/doctor_profile.jpeg')} style={{height: 42, width: 42, borderRadius: 42}} />
+          <View
+            style={{
+              height: 42,
+              width: 42,
+              borderRadius: 42,
+              backgroundColor: '#1479FF',
+            }}></View>
         </View>
         <View
           style={{
             marginTop: 20,
-            height: Platform.OS === 'ios' ? '35%' : '50%',
+            height: Platform.OS === 'ios' ? '40%' : '50%',
             flexDirection: 'row',
             justifyContent: 'space-between',
             backgroundColor: '#FFF',
@@ -317,7 +328,12 @@ const DrugSearchScreen = () => {
               }
               ListEmptyComponent={() => (
                 <Text
-                  style={{textAlign: 'center', color: '#FFF', marginTop: 10}}>
+                  style={{
+                    textAlign: 'center',
+                    color: '#A7AFBC',
+                    marginTop: 10,
+                    fontSize: 20,
+                  }}>
                   Không có kết quả
                 </Text>
               )}

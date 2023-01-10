@@ -50,7 +50,7 @@ const PrescriptionListScreen = () => {
           marginTop: 15,
           borderRadius: 10,
           padding: 10,
-          borderColor: '#EBEBEB',
+          borderColor: '#FFFFFF',
           borderWidth: 1,
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -102,93 +102,73 @@ const PrescriptionListScreen = () => {
           flexDirection: 'column',
           padding: 25,
           backgroundColor: '#1479FF',
-          height: '40%',
-          borderBottomLeftRadius: 50,
-          borderBottomRightRadius: 50,
+          height: '25%',
+          borderBottomLeftRadius: 30,
+          borderBottomRightRadius: 30,
           paddingHorizontal: 20,
         }}>
-        <View style={{height: Platform.OS === 'ios' ? '13%' : '0%'}}></View>
+        <View style={{height: Platform.OS === 'ios' ? '20%' : '0%'}}></View>
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
+            marginTop: 0,
           }}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.goBack();
-            }}>
-            <FontAwesome name={'arrow-left'} size={25} color="#FFF" />
+          <TouchableOpacity onPress={() => {}}>
+            <FontAwesome name={'arrow-left'} size={25} color="#1479FF" />
           </TouchableOpacity>
           <Text style={{fontSize: 25, color: '#FFF', fontWeight: '600'}}>
-            Đơn thuốc
+            Đơn thuốc của tôi
           </Text>
-          <Image source={require('../../assets/images/doctor_profile.jpeg')} style={{height: 42, width: 42, borderRadius: 42}} />
+          <View style={{height: 42, width: 42, borderRadius: 42, backgroundColor: '#1479FF'}}></View>
         </View>
         <View
           style={{
             marginTop: 20,
-            height: Platform.OS === 'ios' ? '25%' : '40%',
-            backgroundColor: '#F4F5F9',
-            justifyContent: 'space-between',
+            height: Platform.OS === 'ios' ? '40%' : '40%',
             flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
             borderRadius: 10,
-            padding: 5,
           }}>
+          <View
+            style={{
+              height: '100%',
+              width: '70%',
+              flexDirection: 'row',
+              backgroundColor: '#fff',
+              borderRadius: 10,
+              padding: 10,
+            }}>
+            <TextInput
+              placeholder="Tìm kiếm đơn"
+              placeholderTextColor={'#ABAEBE'}
+              style={{height: '100%', fontSize: 18}}
+            />
+          </View>
           <TouchableOpacity
             onPress={() => {
-              if (hasPrescription) {
-              } else {
-                setHasPrescription(true);
-              }
+              navigation.navigate('PrescriptionAddScreen');
             }}
             style={{
-              flex: 1,
-              backgroundColor: hasPrescription ? '#2EC28B' : '#F4F5F9',
+              height: '100%',
+              width: '25%',
+              backgroundColor: '#fff',
               borderRadius: 10,
-              justifyContent: 'center',
+              justifyContent: 'space-evenly',
               alignItems: 'center',
+              padding: 5,
             }}>
-            <Text
-              style={{
-                color: hasPrescription ? '#fff' : '#36596A',
-                fontWeight: 'bold',
-                fontSize: 16,
-              }}>
-              Đã có đơn thuốc
-            </Text>
-            <Text style={{color: hasPrescription ? '#fff' : '#A7AFBC'}}>
-              hoặc hình sản phẩm
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if (!hasPrescription) {
-              } else {
-                setHasPrescription(false);
-              }
-            }}
-            style={{
-              flex: 1,
-              backgroundColor: !hasPrescription ? '#2EC28B' : '#F4F5F9',
-              borderRadius: 10,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text
-              style={{
-                color: !hasPrescription ? '#fff' : '#36596A',
-                fontWeight: 'bold',
-                fontSize: 16,
-              }}>
-              Chưa có
-            </Text>
-            <Text style={{color: !hasPrescription ? '#fff' : '#A7AFBC'}}>
-              thêm thuốc vào đơn
-            </Text>
+            <FontAwesome
+              name="prescription-bottle"
+              size={20}
+              color={'#2EC28B'}
+            />
+            <Text style={{color: '#2EC28B'}}>Thêm đơn</Text>
           </TouchableOpacity>
         </View>
-        {hasPrescription ? (
+        {/* {!hasPrescription ? (
           <TouchableOpacity
             style={{
               marginTop: 20,
@@ -248,7 +228,7 @@ const PrescriptionListScreen = () => {
               <Text style={{color: '#A7AFBC'}}>Thêm đơn</Text>
             </TouchableOpacity>
           </View>
-        )}
+        )} */}
       </View>
       <View style={{flex: 1}}>
         {isLoading ? (
@@ -271,10 +251,7 @@ const PrescriptionListScreen = () => {
                 footerLoad ? <ActivityIndicator /> : <View />
               }
               ListEmptyComponent={() => (
-                <Text
-                  style={{textAlign: 'center', color: '#FFF', marginTop: 10}}>
-                  Không có kết quả
-                </Text>
+                <Text style={{textAlign: 'center', color: '#A7AFBC', marginTop: 10}}>Không có kết quả</Text>
               )}
             />
           </View>

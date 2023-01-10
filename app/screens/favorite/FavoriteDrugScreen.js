@@ -44,7 +44,7 @@ const FavoriteDrugScreen = () => {
         var check = bookmarks?.findIndex(i => i.id == item?.id);
         
         return (
-            <TouchableOpacity onPress={() => navigation.navigate('DrugDetailScreen', {data: item})} style={{backgroundColor: '#FFF',justifyContent: 'space-evenly', width: width - 20*2, height: height/4 - 20*2 , marginHorizontal: 20, marginTop: 25, borderRadius: 10, padding: 10 }}>
+            <TouchableOpacity onPress={() => navigation.navigate('DrugDetailScreen', {data: item})} style={{backgroundColor: '#FFF',justifyContent: 'space-evenly', width: width - 20*2, height: height/4 - 20*2 , marginHorizontal: 20, marginTop: 20, borderRadius: 10, padding: 10 }}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <TouchableOpacity onPress={() => {
                         handleRemoveBookmark(check);
@@ -88,18 +88,18 @@ const FavoriteDrugScreen = () => {
 
     return (    
         <View style={{flex:1, backgroundColor: '#F4F5F9', justifyContent: 'space-between'}}>
-            <View style={{flexDirection: 'column', padding: 25, backgroundColor: '#1479FF', height: '28%', borderBottomLeftRadius: 50, borderBottomRightRadius: 50, paddingHorizontal: 20}}>
+            <View style={{flexDirection: 'column', padding: 25, backgroundColor: '#1479FF', height: '25%', borderBottomLeftRadius: 30, borderBottomRightRadius: 30, paddingHorizontal: 20}}>
                 <View style={{height: Platform.OS === 'ios' ? '20%' : '0%'}}></View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 0}}>
-                    <TouchableOpacity onPress={()=>{navigation.goBack()}}>
-                        <FontAwesome name={'arrow-left'} size={25} color="#FFF" />
+                    <TouchableOpacity onPress={()=>{}}>
+                        <FontAwesome name={'arrow-left'} size={25} color="#1479FF" />
                     </TouchableOpacity>
                     <Text style={{fontSize: 25, color: '#FFF', fontWeight: '600'}}>
                         Thuốc yêu thích
                     </Text>
-                    <Image source={require('../../assets/images/doctor_profile.jpeg')} style={{height: 42, width: 42, borderRadius: 42}} />
+                    <View style={{height: 42, width: 42, borderRadius: 42, backgroundColor: '#1479FF'}}></View>
                 </View>
-                <View style={{marginTop: 20, height: Platform.OS === 'ios' ? '35%' : '50%', backgroundColor: '#FFF', justifyContent: 'space-between', flexDirection: 'row', borderRadius: 10, padding: 10}}>
+                <View style={{marginTop: 20, height: Platform.OS === 'ios' ? '40%' : '50%', backgroundColor: '#FFF', justifyContent: 'space-between', flexDirection: 'row', borderRadius: 10, padding: 10}}>
                     <TextInput value={searchFilter} onChangeText={(value) => setSearchFilter(value)} placeholder='Tìm kiếm thuốc' placeholderTextColor={'#ABAEBE'} style={{flex: 8, height: '100%', fontSize: 18}}/>
                     <TouchableOpacity onPress={() => {navigation.navigate('DrugSearchScreen', {dataSearch: searchFilter})}} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                         <FontAwesome name='search' size={25} color='#ABAEBE'/>
@@ -121,7 +121,7 @@ const FavoriteDrugScreen = () => {
                                 onEndReachedThreshold={0.3}
                                 ListFooterComponent={footerLoad ? <ActivityIndicator /> : <View />}
                                 ListEmptyComponent={() => (
-                                    <Text style={{textAlign: 'center', color: '#FFF', marginTop: 10}}>Không có kết quả</Text>
+                                    <Text style={{textAlign: 'center', color: '#A7AFBC', marginTop: 10}}>Không có kết quả</Text>
                                   )}
                             />
                         </View>

@@ -9,6 +9,7 @@ import {
   ScrollView,
   Animated,
   Linking,
+  Dimensions,
   KeyboardAvoidingView,
   StyleSheet,
 } from 'react-native';
@@ -29,7 +30,7 @@ const MainScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const scrollY = React.useRef(new Animated.Value(0)).current;
   const [drugData, setDrugData] = useState({});
-  const [perDay, setPerDay] = useState(0);
+  const [perDay, setPerDay] = useState(1);
   const [unit, setUnit] = useState('');
   const [check, setCheck] = useState(false);
   const prescriptionList = useSelector(state => state.global.prescription);
@@ -143,8 +144,8 @@ const MainScreen = () => {
           padding: 25,
           backgroundColor: '#1479FF',
           height: '30%',
-          borderBottomLeftRadius: 50,
-          borderBottomRightRadius: 50,
+          borderBottomLeftRadius: 30,
+          borderBottomRightRadius: 30,
           paddingHorizontal: 20,
         }}>
         <View style={{height: Platform.OS === 'ios' ? '20%' : '0%'}}></View>
@@ -168,55 +169,104 @@ const MainScreen = () => {
             <FontAwesome name="file-pdf" size={25} light color={'#fff'} />
           </TouchableOpacity>
         </View>
-        <View style={{height: 500}}>
+        <View style={{height: Dimensions.get('window').width * 2 - Dimensions.get('window').height * 0.10}}>
           <View
             style={{
-              height: '35%',
+              height: '30%',
               marginTop: 25,
               backgroundColor: '#fff',
               borderRadius: 10,
-              padding: 5,
+              padding: 20,
               ...Platform.select({
                 android: {elevation: 3},
                 ios: {
                   shadowColor: '#a8bed2',
-                  shadowOpacity: 1,
-                  shadowRadius: 6,
+                  shadowOpacity: 0.7,
+                  shadowRadius: 3,
                   shadowOffset: {
-                    width: 2,
-                    height: 2,
+                    width: 1,
+                    height: 1,
                   },
                 },
               }),
             }}>
-            <Image
-              source={require('../../assets/images/medicine.png')}
-              style={{borderRadius: 10, height: '100%', width: '100%'}}
-              resizeMode="contain"
-            />
+        <View style={{flex: 1}}>
+          <Text style={{color: '#36596A', fontWeight: 'bold', fontSize: 18}}>
+            Liều lượng
+          </Text>
+        </View>
+        <View style={{flex: 3, paddingHorizontal: 10}}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+            <View style={{flex: 1}}>
+              <Text style={{color: '#A7AFBC', fontSize: 18}}>Số lần/ngày</Text>
+            </View>
+            <View style={{flex: 2}}>
+              <TDTextInputNew
+                placeholder={'Số lần trên ngày'}
+                value={perDay}
+                onChangeText={setPerDay}
+                keyboardType="numeric"
+              />
+            </View>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+            <View style={{flex: 1}}>
+              <Text style={{color: '#A7AFBC', fontSize: 18}}>Đơn vị</Text>
+            </View>
+            <View style={{flex: 2}}>
+              <TDTextInputNew
+                placeholder={'Đơn vị'}
+                value={unit}
+                onChangeText={setUnit}
+              />
+            </View>
+          </View>
+        </View>
           </View>
           <ScrollView
+            showsVerticalScrollIndicator={false}
             style={{flex: 1, flexDirection: 'column', paddingTop: 10}}>
             <View>
               <Text
                 style={{fontSize: 25, fontWeight: 'bold', color: '#36596A'}}>
-                {'Tên thuốc: '}<Text style={{fontSize: 25, color: '#36596A'}}>
-                {drugData?.tenThuoc ?? ''}
-              </Text>
+                {'Tên thuốc: '}
+                <Text style={{fontSize: 25, color: '#36596A'}}>
+                  {drugData?.tenThuoc ?? ''}
+                </Text>
               </Text>
             </View>
             <View style={{flexDirection: 'row'}}>
               <Text
-                style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC', fontWeight: 'bold'}}>
+                style={{
+                  paddingTop: 10,
+                  fontSize: 18,
+                  color: '#A7AFBC',
+                  fontWeight: 'bold',
+                }}>
                 {'Số đăng ký: '}
               </Text>
               <Text style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC'}}>
                 {drugData?.soDangKy ?? ''}
               </Text>
             </View>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'column'}}>
               <Text
-                style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC', fontWeight: 'bold'}}>
+                style={{
+                  paddingTop: 10,
+                  fontSize: 18,
+                  color: '#A7AFBC',
+                  fontWeight: 'bold',
+                }}>
                 {'Dạng bào chế: '}
               </Text>
               <Text style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC'}}>
@@ -224,45 +274,121 @@ const MainScreen = () => {
               </Text>
             </View>
             <View style={{flexDirection: 'row'}}>
-              <Text
-                style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC', fontWeight: 'bold'}}>
-                {'Đóng gói: '}
-              </Text>
-              <Text style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC'}}>
-                {drugData?.dongGoi ?? ''}
-              </Text>
+              <View style={{flex: 4, alignItems: 'flex-start'}}>
+                <Text
+                  style={{
+                    paddingTop: 10,
+                    fontSize: 18,
+                    color: '#A7AFBC',
+                    fontWeight: 'bold',
+                  }}>
+                  Hoạt chất
+                </Text>
+                {drugData?.hoatChat?.split('; ')?.map((item, index) => (
+                  <Text
+                    key={index}
+                    style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC'}}>
+                    {item}
+                  </Text>
+                ))}
+              </View>
+              {drugData?.nongDo ? (
+                <View style={{flex: 2, alignItems: 'flex-end'}}>
+                  <Text
+                    style={{
+                      paddingTop: 10,
+                      fontSize: 18,
+                      color: '#A7AFBC',
+                      fontWeight: 'bold',
+                    }}>
+                    Nồng độ
+                  </Text>
+                  {drugData.nongDo?.split(';')?.map((item, index) => (
+                    <Text
+                      key={index}
+                      style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC'}}>
+                      {item}
+                    </Text>
+                  ))}
+                </View>
+              ) : (
+                <></>
+              )}
             </View>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'column'}}>
               <Text
-                style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC', fontWeight: 'bold'}}>
-                {'Hạn SD: '}
+                style={{
+                  paddingTop: 10,
+                  fontSize: 18,
+                  color: '#A7AFBC',
+                  fontWeight: 'bold',
+                }}>
+                {'Quy cách đóng gói: '}
+              </Text>
+              {drugData?.dongGoi?.split('; ')?.map((item, index) => (
+                <View
+                  key={index}
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingTop: 10,
+                    paddingStart: 10,
+                  }}>
+                  <FontAwesome name="capsules" size={15} color="#2EC28B" />
+                  <Text
+                    key={index}
+                    style={{color: '#A7AFBC', fontSize: 18, paddingLeft: 10}}>
+                    {item}
+                  </Text>
+                </View>
+              ))}
+            </View>
+            <View style={{flexDirection: 'column'}}>
+              <Text
+                style={{
+                  paddingTop: 10,
+                  fontSize: 18,
+                  color: '#A7AFBC',
+                  fontWeight: 'bold',
+                }}>
+                {'Hạn sử dụng: '}
               </Text>
               <Text style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC'}}>
                 {drugData?.tuoiTho ?? ''}
               </Text>
             </View>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'column'}}>
               <Text
-                style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC', fontWeight: 'bold'}}>
-                {'Nước sản xuất: '}
+                style={{
+                  paddingTop: 10,
+                  fontSize: 18,
+                  color: '#A7AFBC',
+                  fontWeight: 'bold',
+                }}>
+                {'Công ty sản xuất: '}
               </Text>
               <Text style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC'}}>
-                {drugData?.nuocSx ?? ''}
+                {drugData?.congTySx ?? ''}
               </Text>
             </View>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'column'}}>
               <Text
-                style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC', fontWeight: 'bold'}}>
-                {'Nước đăng ký: '}
+                style={{
+                  paddingTop: 10,
+                  fontSize: 18,
+                  color: '#A7AFBC',
+                  fontWeight: 'bold',
+                }}>
+                {'Công ty đăng ký: '}
               </Text>
               <Text style={{paddingTop: 10, fontSize: 18, color: '#A7AFBC'}}>
-                {drugData?.nuocDk ?? ''}
+                {drugData?.congTyDk ?? ''}
               </Text>
             </View>
           </ScrollView>
         </View>
       </View>
-      <KeyboardAvoidingView style={styles.optionBar}>
+      {/* <View style={styles.optionBar} >
         <View style={{paddingHorizontal: 20, paddingTop: 20}}>
           <Text style={{color: '#36596A', fontWeight: 'bold', fontSize: 18}}>
             Liều lượng
@@ -306,7 +432,7 @@ const MainScreen = () => {
           </View>
         </View>
         <View style={{flex: 3}}></View>
-      </KeyboardAvoidingView>
+      </View> */}
       {route.params.drugEdit ? (
         <View style={styles.container}>
           <TouchableOpacity

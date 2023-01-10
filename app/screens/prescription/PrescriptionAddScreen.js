@@ -55,7 +55,7 @@ const MainScreen = () => {
 
     return (    
         <View style={{flex:1, backgroundColor: '#F4F5F9', justifyContent: 'space-between'}}>
-            <View style={{flexDirection: 'column', padding: 25, backgroundColor: '#1479FF', height: '28%', borderBottomLeftRadius: 50, borderBottomRightRadius: 50, paddingHorizontal: 20}}>
+            <View style={{flexDirection: 'column', padding: 25, backgroundColor: '#1479FF', height: '25%', borderBottomLeftRadius: 30, borderBottomRightRadius: 30, paddingHorizontal: 20}}>
                 <View style={{height: Platform.OS === 'ios' ? '20%' : '0%'}}></View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 0}}>
                     <TouchableOpacity onPress={()=>{navigation.goBack()}}>
@@ -84,18 +84,6 @@ const MainScreen = () => {
                                     Bệnh nhân
                                 </Text>
                                 <TextInput value={prescriptionPatient} onChangeText={setPrescriptionPatient} placeholder='Tên bệnh nhân' placeholderTextColor={'#A7AFBC'} style={{fontSize: 14, marginTop: 10, color: '#A7AFBC'}}/>
-                            </View>
-                            <View style={{backgroundColor: 'white', marginHorizontal: 20, padding: 15, borderRadius: 10, borderColor: '#EBEBEB', borderWidth: 1}}>
-                                <Text style={{color: '#36596A', fontWeight: 'bold', fontSize: 16}}>
-                                    Ngày kê đơn
-                                </Text>
-                                <TextInput value={createDate} onChangeText={setCreateDate} placeholder='Ngày kê đơn' placeholderTextColor={'#A7AFBC'} style={{fontSize: 14, marginTop: 10, color: '#A7AFBC'}}/>
-                            </View>
-                            <View style={{backgroundColor: 'white', margin: 20, padding: 15, borderRadius: 10, borderColor: '#EBEBEB', borderWidth: 1}}>
-                                <Text style={{color: '#36596A', fontWeight: 'bold', fontSize: 16}}>
-                                    Ngày tái khám
-                                </Text>
-                                <TextInput value={expireDate} onChangeText={setExpireDate} placeholder='Ngày tái khám' placeholderTextColor={'#A7AFBC'} style={{fontSize: 14, marginTop: 10, color: '#A7AFBC'}}/>
                             </View>
                             <View style={{backgroundColor: 'white', marginHorizontal: 20, padding: 15, borderRadius: 10, borderColor: '#EBEBEB', borderWidth: 1}}>
                                 <Text style={{color: '#36596A', fontWeight: 'bold', fontSize: 16}}>

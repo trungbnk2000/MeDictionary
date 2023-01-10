@@ -128,7 +128,7 @@ const ProductListScreen = () => {
 
     return (    
         <View style={{flex:1, backgroundColor: '#F4F5F9'}}>
-            <View style={{flexDirection: 'column', padding: 25, backgroundColor: '#1479FF', height: '28%', borderBottomLeftRadius: 50, borderBottomRightRadius: 50, paddingHorizontal: 20}}>
+            <View style={{flexDirection: 'column', padding: 25, backgroundColor: '#1479FF', height: '28%', borderBottomLeftRadius: 30, borderBottomRightRadius: 30, paddingHorizontal: 20}}>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 50}}>
                     <TouchableOpacity onPress={()=>{navigation.goBack()}}>
                         <FontAwesome name={'arrow-left'} size={25} color="#FFF" />

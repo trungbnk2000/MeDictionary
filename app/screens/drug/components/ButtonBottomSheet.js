@@ -6,6 +6,7 @@ import { Overlay } from "react-native-elements";
 import * as actions from '../../../redux/global/Actions';
 import { useSelector, useDispatch} from 'react-redux';
 import { showMessage } from "react-native-flash-message";
+import { useNavigation } from "@react-navigation/native";
 
 const {width, height} = Dimensions.get('window');
 
@@ -15,6 +16,7 @@ const ButtonBottomSheet = (props) => {
     const [amount, setAmount] = useState(0);
     const [unit, setUnit] = useState('');
     const dispatch = useDispatch();
+    const navigation = useNavigation();
     const [isLoading, setIsLoading] = useState(false);
     const medicalBox = useSelector(state => state.global.medicalBox);
     const bookmarks = useSelector(state => state.global.bookmarks);
@@ -78,7 +80,8 @@ const ButtonBottomSheet = (props) => {
             <View style={styles.container}>
                 <TouchableOpacity onPress={() => {
                     handleAddFavorite(item);
-                }} style={{flex: 1, backgroundColor: '#F4F5F9', borderTopLeftRadius: 32, justifyContent: 'center', alignItems: 'center'}}>
+                    navigation.goBack();
+                }} style={{flex: 1, backgroundColor: '#FFFFFF', borderTopLeftRadius: 32, justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={{color: '#36596A', fontWeight: 'bold', fontSize: 16}}>
                         Thêm vào yêu thích
                     </Text>
@@ -156,6 +159,7 @@ const ButtonBottomSheet = (props) => {
                     <View style={{flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center'}}>
                         <TouchableOpacity onPress={() => {
                             handleAddMedicalBox(item);
+                            navigation.goBack();
                         }} style={{width: '75%', height: '75%', backgroundColor: '#DEE9FA', borderRadius: 10, justifyContent: 'center', alignItems: 'center'}}>
                         {isLoading ? (
                             <ActivityIndicator size="small" color="#fb8c00" style={{flex: 1, justifyContent: 'center'}} />

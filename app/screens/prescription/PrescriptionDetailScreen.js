@@ -77,8 +77,8 @@ const PresciptionDetailScreen = () => {
             padding: 25,
             backgroundColor: '#1479FF',
             height: '28%',
-            borderBottomLeftRadius: 50,
-            borderBottomRightRadius: 50,
+            borderBottomLeftRadius: 30,
+            borderBottomRightRadius: 30,
             paddingHorizontal: 20,
           }}>
           <View style={{height: Platform.OS === 'ios' ? '20%' : '0%'}}></View>
@@ -130,7 +130,7 @@ const PresciptionDetailScreen = () => {
             </View>
             <TouchableOpacity
               style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
-              <FontAwesome style={{}} name={'pen'} size={20} color="#252B48" />
+              <FontAwesome style={{}} name={'pen'} light size={20} color="#252B48" />
             </TouchableOpacity>
           </View>
         </View>
@@ -196,6 +196,7 @@ const PresciptionDetailScreen = () => {
                           }}>
                           <FontAwesome
                             name={'chevron-right'}
+                            light
                             size={20}
                             color="#36596A"
                           />
