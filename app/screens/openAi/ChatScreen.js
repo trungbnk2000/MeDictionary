@@ -35,22 +35,22 @@ const ChatScreen = () => {
   const dispatch = useDispatch();
   const scrollViewRef = useRef();
 
-  const handleString = (string) => {
-    
-  }
-
   const fetchBot = async () => {
-    const {data} = await axios.post(
-      'https://chatgpt-ai-app-od21.onrender.com',
-      {input: searchFilter},
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    );
+    const res = await axios.post('https://api.openai.com/v1/completions',
+    JSON.stringify({
+      model: 'text-davinci-003',
+      prompt: searchFilter,
+      max_tokens: 512,
+      temperature: 0
+    }),{
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer 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',
+      }
+    },
+    )
 
-    return data;
+    return res;
   };
 
   const handleSubmit = () => {
@@ -65,7 +65,7 @@ const ChatScreen = () => {
         ...prevMessages,
         {
           name: 'OpenAI',
-          message: res.bot.trim().includes('?\n\n') ? res.bot.trim().split('?\n\n')[1] : res.bot.trim(),
+          message: res?.data.choices[0].text.trim().includes('?\n\n') ? res?.data.choices[0].text.trim().split('?\n\n')[1] : res?.data.choices[0].text.trim(),
         },
       ]);
     });

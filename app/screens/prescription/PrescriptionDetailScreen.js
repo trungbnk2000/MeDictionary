@@ -130,7 +130,7 @@ const PresciptionDetailScreen = () => {
             </View>
             <TouchableOpacity
               style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
-              <FontAwesome style={{}} name={'pen'} light size={20} color="#252B48" />
+              <FontAwesome style={{}} name={'pen'} light size={20} color="#FFF" />
             </TouchableOpacity>
           </View>
         </View>

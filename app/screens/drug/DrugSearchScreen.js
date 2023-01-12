@@ -21,6 +21,7 @@ import {requestPOST_CD} from '../../services/Api';
 import {useSelector, useDispatch} from 'react-redux';
 import * as actions from '../../redux/global/Actions';
 const {width, height} = Dimensions.get('window');
+import { showMessage } from 'react-native-flash-message';
 
 const ITEM_WIDTH = width / 2 - 10 * 3;
 
@@ -37,13 +38,44 @@ const DrugSearchScreen = () => {
   const [searchFilter, setSearchFilter] = useState('');
   const bookmarks = useSelector(state => state.global.bookmarks);
   const prescriptionList = useSelector(state => state.global.prescription);
+  const [prescriptionPatient, setPrescriptionPatient] = useState('');
+  const [drugName, setDrugName] = useState('');
+  const [perDay, setPerDay] = useState('');
+  const [unit, setUnit] = useState(''); 
 
-  const handleAddPrescription = item => {
-    // var _drugList = prescription.drugList;
-    // prescription.drugList = [..._drugList, item];
-    // console.log(prescription);
-    // dispatch(actions.setPrescription(prescriptionList));
-  };
+  const addDrug = () => {
+    console.log({
+      tenThuoc: drugName,
+      perDay: perDay,
+      unit: unit
+    });
+    console.log(prescription);
+
+    var prescriptionIndex = -1;
+    prescriptionList.map((item, index) => {
+      if(item.id === prescription.id){
+        prescriptionIndex = index;
+      }
+    })
+    var payload = {
+      drug: {tenThuoc: drugName, perDay: perDay, unit: unit},
+      index: prescriptionIndex,
+    }
+    dispatch(actions.addDrugPrescription(payload));
+    showMessage({
+      message: 'Thành công',
+      description: 'Thêm thành công vào đơn thuốc!',
+      type: 'success',
+    });
+    dispatch(actions.setRandom());
+    var _prescription = {};
+    prescriptionList.map((item, index) => {
+      if(item.id === prescription.id){
+        _prescription = item;
+      }
+    });
+    navigation.navigate('PrescriptionDetailScreen', {data: _prescription});
+  }
 
   const handleRemovePrescription = index => {
     Alert.alert(
@@ -326,17 +358,131 @@ const DrugSearchScreen = () => {
               ListFooterComponent={
                 footerLoad ? <ActivityIndicator /> : <View />
               }
-              ListEmptyComponent={() => (
-                <Text
-                  style={{
-                    textAlign: 'center',
-                    color: '#A7AFBC',
-                    marginTop: 10,
-                    fontSize: 20,
-                  }}>
-                  Không có kết quả
-                </Text>
-              )}
+              ListEmptyComponent={
+                prescription ? (
+                  <View style={{flex: 1}}>
+                    <Text
+                      style={{
+                        textAlign: 'center',
+                        color: '#A7AFBC',
+                        marginTop: 10,
+                      }}>
+                      Không tìm thấy thuốc theo từ khoá
+                    </Text>
+                    <View style={{margin: 20, flex: 1}}>
+                      <Text
+                        style={{
+                          color: '#36596A',
+                          fontSize: 18,
+                          fontWeight: 'bold',
+                        }}>
+                        Thêm thuốc của bạn
+                      </Text>
+                      <View
+                        style={{
+                          backgroundColor: 'white',
+                          marginTop: 20,
+                          padding: 15,
+                          borderRadius: 10,
+                          borderColor: '#EBEBEB',
+                          borderWidth: 1,
+                        }}>
+                        <Text
+                          style={{
+                            color: '#36596A',
+                            fontWeight: 'bold',
+                            fontSize: 16,
+                          }}>
+                          Tên thuốc
+                        </Text>
+                        <TextInput
+                          value={drugName}
+                          onChangeText={setDrugName}
+                          placeholder="Tên thuốc"
+                          placeholderTextColor={'#A7AFBC'}
+                          style={{
+                            fontSize: 14,
+                            marginTop: 10,
+                            color: '#A7AFBC',
+                          }}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          backgroundColor: 'white',
+                          marginTop: 20,
+                          padding: 15,
+                          borderRadius: 10,
+                          borderColor: '#EBEBEB',
+                          borderWidth: 1,
+                        }}>
+                        <Text
+                          style={{
+                            color: '#36596A',
+                            fontWeight: 'bold',
+                            fontSize: 16,
+                          }}>
+                          Số lần/ngày
+                        </Text>
+                        <TextInput
+                          value={perDay}
+                          onChangeText={setPerDay}
+                          placeholder="Số lần/ngày"
+                          placeholderTextColor={'#A7AFBC'}
+                          style={{
+                            fontSize: 14,
+                            marginTop: 10,
+                            color: '#A7AFBC',
+                          }}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          backgroundColor: 'white',
+                          padding: 15,
+                          marginTop: 20,
+                          borderRadius: 10,
+                          borderColor: '#EBEBEB',
+                          borderWidth: 1,
+                        }}>
+                        <Text
+                          style={{
+                            color: '#36596A',
+                            fontWeight: 'bold',
+                            fontSize: 16,
+                          }}>
+                          Đơn vị
+                        </Text>
+                        <TextInput
+                          value={unit}
+                          onChangeText={setUnit}
+                          placeholder="Đơn vị"
+                          placeholderTextColor={'#A7AFBC'}
+                          style={{
+                            fontSize: 14,
+                            marginTop: 10,
+                            color: '#A7AFBC',
+                          }}
+                        />
+                      </View>
+                      <TouchableOpacity onPress={() => {
+                        addDrug();
+                      }} style={{backgroundColor: '#2EC28B', height: '15%', width: '100%', marginTop: 20, borderRadius: 10, justifyContent: 'center', alignItems: 'center'}}>
+                          <Text style={{color: '#FFF', fontSize: 18}}>Thêm thuốc vào đơn</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                ) : (
+                  <Text
+                    style={{
+                      textAlign: 'center',
+                      color: '#A7AFBC',
+                      marginTop: 10,
+                    }}>
+                    Không có kết quả
+                  </Text>
+                )
+              }
             />
           </View>
         )}
